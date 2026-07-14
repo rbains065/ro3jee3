@@ -121,6 +121,9 @@ export default function FreeHomepageDesign() {
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   Hi {formData.name}, thank you for requesting a free custom mockup. Scott will review your {formData.businessType} details and send you an email within 2 hours with Google Meet times.
                 </p>
+                <p className="text-xs text-accent font-semibold mt-3 animate-pulse bg-accent/10 py-2 px-3 rounded-lg border border-accent/20">
+                  ⚠️ Please check your **Spam or Junk folder** as our automated confirmation and initial replies may sometimes land there.
+                </p>
                 <Link to="/discovery-call" className="btn-cta h-11 w-full text-sm mt-4">
                   Go to Calendar Booking
                 </Link>

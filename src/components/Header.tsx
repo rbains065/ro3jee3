@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ChevronDown, Phone } from "lucide-react";
+import { motion } from "motion/react";
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -11,6 +12,12 @@ export default function Header() {
   const location = useLocation();
 
   const isActive = (path: string) => location.pathname === path;
+
+  const isServicesActive = () => 
+    ["/web-design-services", "/website-redesign", "/website-maintenance"].includes(location.pathname);
+
+  const isIndustriesActive = () => 
+    location.pathname.startsWith("/websites-for-");
 
   const toggleMobile = () => setMobileOpen(!mobileOpen);
 
@@ -30,7 +37,7 @@ export default function Header() {
         </Link>
 
         {/* Desktop Nav */}
-        <nav aria-label="Primary" className="hidden items-center gap-7 lg:flex">
+        <nav aria-label="Primary" className="hidden items-center gap-2 lg:flex">
           {/* Services Dropdown */}
           <div className="relative">
             <button
@@ -40,8 +47,15 @@ export default function Header() {
                 setIndustriesOpen(false);
               }}
               onMouseEnter={() => setServicesOpen(true)}
-              className="inline-flex items-center gap-1 text-sm font-medium text-primary/80 transition-colors hover:text-accent focus:outline-none"
+              className={`relative px-3.5 py-1.5 inline-flex items-center gap-1 text-sm font-medium transition-colors hover:text-accent focus:outline-none ${isServicesActive() ? "text-accent font-semibold" : "text-primary/80"}`}
             >
+              {isServicesActive() && (
+                <motion.span
+                  layoutId="activeNavIndicator"
+                  className="absolute inset-0 -z-10 rounded-lg bg-accent/10"
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                />
+              )}
               Services
               <ChevronDown className={`h-3.5 w-3.5 transition-transform ${servicesOpen ? "rotate-180" : ""}`} />
             </button>
@@ -77,48 +91,43 @@ export default function Header() {
 
           <Link
             to="/pricing"
-            className={`text-sm font-medium transition-colors hover:text-accent ${isActive("/pricing") ? "text-accent font-semibold" : "text-primary/80"}`}
+            className={`relative px-3.5 py-1.5 text-sm font-medium transition-colors hover:text-accent ${isActive("/pricing") ? "text-accent font-semibold" : "text-primary/80"}`}
           >
+            {isActive("/pricing") && (
+              <motion.span
+                layoutId="activeNavIndicator"
+                className="absolute inset-0 -z-10 rounded-lg bg-accent/10"
+                transition={{ type: "spring", stiffness: 380, damping: 30 }}
+              />
+            )}
             Pricing
           </Link>
 
-          {/* Industries Dropdown */}
-          <div className="relative">
-            <button
-              onClick={() => {
-                setIndustriesOpen(!industriesOpen);
-                setServicesOpen(false);
-                setWorkOpen(false);
-              }}
-              onMouseEnter={() => setIndustriesOpen(true)}
-              className="inline-flex items-center gap-1 text-sm font-medium text-primary/80 transition-colors hover:text-accent focus:outline-none"
-            >
-              Industries
-              <ChevronDown className={`h-3.5 w-3.5 transition-transform ${industriesOpen ? "rotate-180" : ""}`} />
-            </button>
-            {industriesOpen && (
-              <div
-                onMouseLeave={() => setIndustriesOpen(false)}
-                className="absolute left-0 mt-2 w-56 rounded-xl border border-border bg-card p-2 shadow-lg z-50 grid grid-cols-1 max-h-80 overflow-y-auto"
-              >
-                {["Salons", "Restaurants", "Contractors", "Dentists", "Lawyers", "Real Estate", "Boutiques", "Cafes"].map((industry) => (
-                  <Link
-                    key={industry}
-                    to={`/websites-for-${industry.toLowerCase().replace(" ", "-")}`}
-                    onClick={() => setIndustriesOpen(false)}
-                    className="block rounded-lg px-4 py-2 text-sm text-primary/90 hover:bg-surface hover:text-accent"
-                  >
-                    {industry}
-                  </Link>
-                ))}
-              </div>
+          <Link
+            to="/websites-for-contractors"
+            className={`relative px-3.5 py-1.5 text-sm font-medium transition-colors hover:text-accent ${isIndustriesActive() ? "text-accent font-semibold" : "text-primary/80"}`}
+          >
+            {isIndustriesActive() && (
+              <motion.span
+                layoutId="activeNavIndicator"
+                className="absolute inset-0 -z-10 rounded-lg bg-accent/10"
+                transition={{ type: "spring", stiffness: 380, damping: 30 }}
+              />
             )}
-          </div>
+            Industries
+          </Link>
 
           <Link
             to="/about"
-            className={`text-sm font-medium transition-colors hover:text-accent ${isActive("/about") ? "text-accent font-semibold" : "text-primary/80"}`}
+            className={`relative px-3.5 py-1.5 text-sm font-medium transition-colors hover:text-accent ${isActive("/about") ? "text-accent font-semibold" : "text-primary/80"}`}
           >
+            {isActive("/about") && (
+              <motion.span
+                layoutId="activeNavIndicator"
+                className="absolute inset-0 -z-10 rounded-lg bg-accent/10"
+                transition={{ type: "spring", stiffness: 380, damping: 30 }}
+              />
+            )}
             About
           </Link>
         </nav>
@@ -171,21 +180,13 @@ export default function Header() {
               </Link>
             </div>
 
-            <div className="font-semibold text-xs uppercase tracking-wider text-muted-foreground border-b pb-1 mt-2">
-              Industries We Serve
-            </div>
-            <div className="grid grid-cols-2 gap-2 pl-2">
-              {["Salons", "Restaurants", "Contractors", "Dentists", "Lawyers", "Real Estate", "Boutiques", "Cafes"].map((industry) => (
-                <Link
-                  key={industry}
-                  onClick={toggleMobile}
-                  to={`/websites-for-${industry.toLowerCase().replace(" ", "-")}`}
-                  className="text-sm font-medium text-primary/80 hover:text-accent"
-                >
-                  {industry}
-                </Link>
-              ))}
-            </div>
+            <Link 
+              onClick={toggleMobile} 
+              to="/websites-for-contractors" 
+              className="text-sm font-semibold hover:text-accent border-b pb-1 mt-2 text-primary"
+            >
+              Industries →
+            </Link>
 
             <div className="font-semibold text-xs uppercase tracking-wider text-muted-foreground border-b pb-1 mt-2">
               Pages

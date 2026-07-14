@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Check, Star, ShieldCheck, Server, Lock, Database, Activity, RefreshCw, SquarePen, AlertTriangle } from "lucide-react";
+import { motion } from "motion/react";
 
 const MAINTENANCE_FAQ = [
   {
@@ -20,9 +21,18 @@ const MAINTENANCE_FAQ = [
   }
 ];
 
+const revealVariants = {
+  hidden: { opacity: 0, y: 32 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
+  }
+};
+
 export default function WebsiteMaintenance() {
   return (
-    <div className="pt-14 text-primary select-text">
+    <div className="pt-14 text-primary select-text overflow-hidden">
       {/* Breadcrumb */}
       <div className="border-b border-border bg-surface">
         <div className="container-page py-3 text-sm text-muted-foreground">
@@ -38,27 +48,39 @@ export default function WebsiteMaintenance() {
       <section className="relative overflow-hidden bg-white py-12 lg:py-16">
         <div className="absolute inset-0 -z-10 opacity-55" style={{ background: "radial-gradient(50% 50% at 50% 0%, rgba(255,107,53,0.12), transparent 70%)" }}></div>
         <div className="container-page text-center max-w-3xl">
-          <span className="eyebrow">
-            <Server className="h-3.5 w-3.5" /> High-Performance Care Plans
-          </span>
-          <h1 className="mt-4 text-4xl font-extrabold leading-tight text-primary lg:text-5xl font-display">
-            Bespoke Website Maintenance & Edge Hosting
-          </h1>
-          <p className="mt-4 text-base md:text-lg text-muted-foreground leading-relaxed">
-            Secure, global CDN hosting, SSL certificate renewals, automated daily backups, round-the-clock uptime monitoring, and minor content edits — all handled in one simple plan. No code updates to worry about. Plans from $69/month.
-          </p>
-          <div className="mt-8 flex justify-center">
-            <Link to="/free-homepage-design" className="btn-cta text-sm">
-              Get a Free Homepage Mockup
-            </Link>
-          </div>
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={revealVariants}
+          >
+            <span className="eyebrow">
+              <Server className="h-3.5 w-3.5" /> High-Performance Care Plans
+            </span>
+            <h1 className="mt-4 text-4xl font-extrabold leading-tight text-primary lg:text-5xl font-display">
+              Bespoke Website Maintenance & Edge Hosting
+            </h1>
+            <p className="mt-4 text-base md:text-lg text-muted-foreground leading-relaxed">
+              Secure, global CDN hosting, SSL certificate renewals, automated daily backups, round-the-clock uptime monitoring, and minor content edits — all handled in one simple plan. No code updates to worry about. Plans from $69/month.
+            </p>
+            <div className="mt-8 flex justify-center">
+              <Link to="/free-homepage-design" className="btn-cta text-sm">
+                Get a Free Homepage Mockup
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Why maintenance is not optional */}
-      <section className="section-y bg-surface">
+      <section className="section-y bg-surface overflow-hidden">
         <div className="container-page max-w-3xl">
-          <div className="rounded-2xl border-2 border-primary/20 bg-card p-6 md:p-8 flex gap-4 items-start shadow-sm">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={revealVariants}
+            className="rounded-2xl border-2 border-primary/20 bg-card p-6 md:p-8 flex gap-4 items-start shadow-sm"
+          >
             <AlertTriangle className="h-10 w-10 text-accent shrink-0 mt-1" />
             <div>
               <h3 className="text-xl font-bold text-primary font-display">Unmaintained sites decay.</h3>
@@ -66,17 +88,23 @@ export default function WebsiteMaintenance() {
                 A website is active software. Left unmaintained, software dependencies accumulate security vulnerabilities, images bloat, and loading speeds degrade. Google penalizes slow, unsecured websites, dropping your search visibility over time.
               </p>
             </div>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Maintenance Deliverables */}
-      <section className="section-y bg-white">
+      <section className="section-y bg-white overflow-hidden">
         <div className="container-page">
-          <div className="text-center mb-12">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-120px" }}
+            variants={revealVariants}
+            className="text-center mb-12"
+          >
             <span className="eyebrow">What is Covered</span>
             <h2 className="h2 mt-4 text-primary">Our technical essentials care checklist.</h2>
-          </div>
+          </motion.div>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
             {[
@@ -89,7 +117,14 @@ export default function WebsiteMaintenance() {
             ].map((item, idx) => {
               const IconComp = item.icon;
               return (
-                <div key={idx} className="flex gap-4 rounded-xl border border-border bg-card p-5 hover:border-accent transition-colors">
+                <motion.div 
+                  key={idx} 
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.5, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                  className="flex gap-4 rounded-xl border border-border bg-card p-5 hover:border-accent transition-colors"
+                >
                   <div className="grid h-10 w-10 place-items-center rounded-lg bg-accent/10 text-accent shrink-0">
                     <IconComp className="h-5 w-5" />
                   </div>
@@ -97,7 +132,7 @@ export default function WebsiteMaintenance() {
                     <h3 className="text-sm font-bold text-primary font-display">{item.title}</h3>
                     <p className="mt-1 text-xs text-muted-foreground leading-relaxed">{item.desc}</p>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
@@ -105,16 +140,28 @@ export default function WebsiteMaintenance() {
       </section>
 
       {/* Plan Card Pricing */}
-      <section className="section-y bg-surface border-t border-border">
+      <section className="section-y bg-surface border-t border-border overflow-hidden">
         <div className="container-page">
-          <div className="text-center mb-12">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-120px" }}
+            variants={revealVariants}
+            className="text-center mb-12"
+          >
             <span className="eyebrow">Plans</span>
             <h2 className="h2 mt-4 text-primary">Simple, contract-free support plans.</h2>
-          </div>
+          </motion.div>
 
           <div className="grid gap-6 md:grid-cols-3 max-w-5xl mx-auto">
             {/* Starter */}
-            <div className="rounded-2xl border border-border bg-card p-6 shadow-sm flex flex-col justify-between">
+            <motion.div 
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="rounded-2xl border border-border bg-card p-6 shadow-sm flex flex-col justify-between"
+            >
               <div>
                 <h3 className="text-lg font-bold text-primary font-display">Starter Care</h3>
                 <div className="mt-2 text-2xl font-extrabold text-primary">$69<span className="text-xs text-muted-foreground font-normal">/mo</span></div>
@@ -127,10 +174,16 @@ export default function WebsiteMaintenance() {
                 </ul>
               </div>
               <Link to="/contact" className="btn-outline h-10 py-0 text-xs font-bold mt-6 w-full">Choose Plan</Link>
-            </div>
+            </motion.div>
 
             {/* Professional */}
-            <div className="rounded-2xl border-2 border-accent bg-card p-6 shadow-md flex flex-col justify-between relative">
+            <motion.div 
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="rounded-2xl border-2 border-accent bg-card p-6 shadow-md flex flex-col justify-between relative"
+            >
               <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-3 py-0.5 text-[10px] font-bold uppercase text-white">Recommended</span>
               <div>
                 <h3 className="text-lg font-bold text-primary font-display">Professional Care</h3>
@@ -144,10 +197,16 @@ export default function WebsiteMaintenance() {
                 </ul>
               </div>
               <Link to="/contact" className="btn-cta h-10 py-0 text-xs font-bold mt-6 w-full">Choose Plan</Link>
-            </div>
+            </motion.div>
 
             {/* Custom */}
-            <div className="rounded-2xl border border-border bg-card p-6 shadow-sm flex flex-col justify-between">
+            <motion.div 
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="rounded-2xl border border-border bg-card p-6 shadow-sm flex flex-col justify-between"
+            >
               <div>
                 <h3 className="text-lg font-bold text-primary font-display">Custom Care</h3>
                 <div className="mt-2 text-2xl font-extrabold text-primary">$199<span className="text-xs text-muted-foreground font-normal">/mo</span></div>
@@ -160,18 +219,30 @@ export default function WebsiteMaintenance() {
                 </ul>
               </div>
               <Link to="/contact" className="btn-outline h-10 py-0 text-xs font-bold mt-6 w-full">Choose Plan</Link>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Maintenance FAQ */}
-      <section className="section-y bg-white border-t border-border">
+      <section className="section-y bg-white border-t border-border overflow-hidden">
         <div className="container-page">
-          <div className="mx-auto max-w-2xl text-center mb-10">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-120px" }}
+            variants={revealVariants}
+            className="mx-auto max-w-2xl text-center mb-10"
+          >
             <h2 className="h2 text-primary font-display">Maintenance Frequently Asked Questions</h2>
-          </div>
-          <div className="mx-auto max-w-3xl border border-border rounded-2xl bg-card divide-y divide-border shadow-sm">
+          </motion.div>
+          <motion.div 
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="mx-auto max-w-3xl border border-border rounded-2xl bg-card divide-y divide-border shadow-sm"
+          >
             {MAINTENANCE_FAQ.map((faq, index) => (
               <details key={index} className="group p-6 focus:outline-none">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-primary hover:text-accent font-display text-lg">
@@ -183,20 +254,27 @@ export default function WebsiteMaintenance() {
                 </p>
               </details>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Footer CTA */}
-      <section className="bg-primary text-white py-16 text-center">
+      <section className="bg-primary text-white py-16 text-center overflow-hidden">
         <div className="container-page">
-          <h2 className="h2 text-white font-display">Get a custom website with maintenance bundled.</h2>
-          <p className="mt-3 text-white/80">Every Buildora project goes live with safe secure hosting and backups pre-configured.</p>
-          <div className="mt-8">
-            <Link to="/free-homepage-design" className="btn-cta text-base">
-              Get My Free Mockup Design
-            </Link>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <h2 className="h2 text-white font-display">Get a custom website with maintenance bundled.</h2>
+            <p className="mt-3 text-white/80">Every Buildora project goes live with safe secure hosting and backups pre-configured.</p>
+            <div className="mt-8">
+              <Link to="/free-homepage-design" className="btn-cta text-base">
+                Get My Free Mockup Design
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
     </div>

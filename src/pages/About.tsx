@@ -1,9 +1,19 @@
 import { Link } from "react-router-dom";
 import { Award, Zap, Eye, Target, Heart, Check, Info } from "lucide-react";
+import { motion } from "motion/react";
+
+const revealVariants = {
+  hidden: { opacity: 0, y: 32 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
+  }
+};
 
 export default function About() {
   return (
-    <div className="pt-14 text-primary select-text">
+    <div className="pt-14 text-primary select-text overflow-hidden">
       {/* Breadcrumb */}
       <div className="border-b border-border bg-surface">
         <div className="container-page py-3 text-sm text-muted-foreground">
@@ -17,28 +27,40 @@ export default function About() {
       <section className="relative overflow-hidden bg-white py-10 lg:py-14 border-b border-border">
         <div className="absolute inset-0 -z-10 opacity-50" style={{ background: "radial-gradient(60% 50% at 50% 0%, rgba(255,107,53,0.1), transparent 70%)" }}></div>
         <div className="container-page text-center max-w-3xl">
-          <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Our Story</span>
-          <h1 className="mt-3 text-4xl font-extrabold leading-tight text-primary lg:text-5xl font-display">
-            We Build Websites That Work. Here Is Why.
-          </h1>
-          <p className="mx-auto mt-4 text-base md:text-lg text-muted-foreground leading-relaxed">
-            Buildora was born out of a simple idea: small businesses deserve custom-coded, high-performance websites at transparent prices. Not $20,000 agency overheads, not $99 template clones.
-          </p>
-          <div className="mt-6 flex justify-center">
-            <Link to="/free-homepage-design" className="btn-cta text-sm">
-              Get a Free Mockup Design
-            </Link>
-          </div>
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={revealVariants}
+          >
+            <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground">Our Story</span>
+            <h1 className="mt-3 text-4xl font-extrabold leading-tight text-primary lg:text-5xl font-display">
+              We Build Websites That Work. Here Is Why.
+            </h1>
+            <p className="mx-auto mt-4 text-base md:text-lg text-muted-foreground leading-relaxed">
+              Buildora was born out of a simple idea: small businesses deserve custom-coded, high-performance websites at transparent prices. Not $20,000 agency overheads, not $99 template clones.
+            </p>
+            <div className="mt-6 flex justify-center">
+              <Link to="/free-homepage-design" className="btn-cta text-sm">
+                Get a Free Mockup Design
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Main Narrative / Bio */}
-      <section className="section-y bg-surface">
+      <section className="section-y bg-surface overflow-hidden">
         <div className="container-page">
           <div className="grid items-center gap-12 lg:grid-cols-12">
             
             {/* Bio Photo Placeholder - Text-Only Metadata Card, No Image */}
-            <div className="lg:col-span-5 relative">
+            <motion.div 
+              initial={{ opacity: 0, x: -32 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-5 relative"
+            >
               <div className="absolute -inset-4 -z-10 rounded-3xl bg-gradient-to-br from-accent/30 to-primary/10 blur-xl"></div>
               <div className="w-full rounded-2xl bg-card border border-border flex flex-col p-8 text-left shadow-md space-y-6">
                 <div>
@@ -60,10 +82,16 @@ export default function About() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Narrative text */}
-            <div className="lg:col-span-7 space-y-5">
+            <motion.div 
+              initial={{ opacity: 0, x: 32 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-7 space-y-5"
+            >
               <span className="eyebrow">Founder Profile</span>
               <h2 className="h2 text-primary">Hi, I'm Scott Martin.</h2>
               <p className="text-base text-muted-foreground leading-relaxed">
@@ -75,79 +103,113 @@ export default function About() {
               <p className="text-sm text-muted-foreground leading-relaxed">
                 I noticed a frustrating trend: agencies quoting five-figure packages to support high downtown rent and physical sales reps, while DIY platforms left owners with clunky, slow sites that fail Core Web Vitals. Buildora exists to offer a reliable, professional alternative: clean custom code, honest pricing, and direct communication.
               </p>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Why We Exist Philosophy */}
-      <section className="section-y bg-white">
+      <section className="section-y bg-white overflow-hidden">
         <div className="container-page max-w-3xl">
-          <span className="eyebrow">Our Philosophy</span>
-          <h2 className="h2 mt-4 text-primary">The web agency model is broken.</h2>
-          <div className="mt-6 space-y-4 text-base text-muted-foreground leading-relaxed">
-            <p>
-              <strong>The traditional agency approach:</strong> They charge $15,000 for a site, take months to write it, route every change through an account manager, and deliver a complex system you can't edit without paying their high hourly retainer. Much of your budget pays for their physical overhead and marketing.
-            </p>
-            <p>
-              <strong>The DIY page-builder approach:</strong> Wix, Squarespace, GoDaddy. You spend 40 hours of your own time dragging components around. The result looks identical to every other template, loads slowly on mobile, fails Google's Core Web Vitals, and doesn't claim local map packs properly.
-            </p>
-            <p>
-              Buildora represents the modern approach. Custom-coded, fast React SPAs starting at CA$499, shipped in 3–10 business days. Direct developer emails. Compounding local SEO retainer packages. 100% owned by you.
-            </p>
-          </div>
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-120px" }}
+            variants={revealVariants}
+          >
+            <span className="eyebrow">Our Philosophy</span>
+            <h2 className="h2 mt-4 text-primary">The web agency model is broken.</h2>
+            <div className="mt-6 space-y-4 text-base text-muted-foreground leading-relaxed">
+              <p>
+                <strong>The traditional agency approach:</strong> They charge $15,000 for a site, take months to write it, route every change through an account manager, and deliver a complex system you can't edit without paying their high hourly retainer. Much of your budget pays for their physical overhead and marketing.
+              </p>
+              <p>
+                <strong>The DIY page-builder approach:</strong> Wix, Squarespace, GoDaddy. You spend 40 hours of your own time dragging components around. The result looks identical to every other template, loads slowly on mobile, fails Google's Core Web Vitals, and doesn't claim local map packs properly.
+              </p>
+              <p>
+                Buildora represents the modern approach. Custom-coded, fast React SPAs starting at CA$499, shipped in 3–10 business days. Direct developer emails. Compounding local SEO retainer packages. 100% owned by you.
+              </p>
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Core Values */}
-      <section className="section-y bg-surface">
+      <section className="section-y bg-surface overflow-hidden">
         <div className="container-page">
-          <div className="text-center mb-12">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-120px" }}
+            variants={revealVariants}
+            className="text-center mb-12"
+          >
             <span className="eyebrow">Our Values</span>
             <h2 className="h2 mt-4 text-primary">What we stand for.</h2>
-          </div>
+          </motion.div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="rounded-2xl border border-border bg-card p-6 shadow-sm hover:border-accent transition-all">
-              <Zap className="h-8 w-8 text-accent" />
-              <h3 className="mt-5 text-lg font-bold text-primary font-display">Speed</h3>
-              <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
-                We launch websites in 3 to 10 days. We don't drag projects out to justify bloated invoices. Lean execution only.
-              </p>
-            </div>
-            <div className="rounded-2xl border border-border bg-card p-6 shadow-sm hover:border-accent transition-all">
-              <Eye className="h-8 w-8 text-accent" />
-              <h3 className="mt-5 text-lg font-bold text-primary font-display">Transparency</h3>
-              <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
-                Pricing is posted publicly. No discovery fees to get a quote, no locked-in long-term contracts.
-              </p>
-            </div>
-            <div className="rounded-2xl border border-border bg-card p-6 shadow-sm hover:border-accent transition-all">
-              <Target className="h-8 w-8 text-accent" />
-              <h3 className="mt-5 text-lg font-bold text-primary font-display">Results</h3>
-              <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
-                Layouts, headings, and SEO markup are optimized for conversion: turning Google searchers into active appointments.
-              </p>
-            </div>
-            <div className="rounded-2xl border border-border bg-card p-6 shadow-sm hover:border-accent transition-all">
-              <Heart className="h-8 w-8 text-accent" />
-              <h3 className="mt-5 text-lg font-bold text-primary font-display">Partnership</h3>
-              <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
-                We answer our own phone calls and handle updates same-day. We support your business for the long term.
-              </p>
-            </div>
+            {[
+              {
+                Icon: Zap,
+                title: "Speed",
+                desc: "We launch websites in 3 to 10 days. We don't drag projects out to justify bloated invoices. Lean execution only."
+              },
+              {
+                Icon: Eye,
+                title: "Transparency",
+                desc: "Pricing is posted publicly. No discovery fees to get a quote, no locked-in long-term contracts."
+              },
+              {
+                Icon: Target,
+                title: "Results",
+                desc: "Layouts, headings, and SEO markup are optimized for conversion: turning Google searchers into active appointments."
+              },
+              {
+                Icon: Heart,
+                title: "Partnership",
+                desc: "We answer our own phone calls and handle updates same-day. We support your business for the long term."
+              }
+            ].map((value, idx) => (
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.6, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="rounded-2xl border border-border bg-card p-6 shadow-sm hover:border-accent transition-all"
+              >
+                <value.Icon className="h-8 w-8 text-accent" />
+                <h3 className="mt-5 text-lg font-bold text-primary font-display">{value.title}</h3>
+                <p className="mt-2 text-xs text-muted-foreground leading-relaxed">
+                  {value.desc}
+                </p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Difference List Grid */}
-      <section className="section-y bg-white">
+      <section className="section-y bg-white overflow-hidden">
         <div className="container-page">
-          <div className="mx-auto max-w-2xl text-center mb-10">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-120px" }}
+            variants={revealVariants}
+            className="mx-auto max-w-2xl text-center mb-10"
+          >
             <h2 className="h2 text-primary">How we are different from big agencies</h2>
-          </div>
+          </motion.div>
 
-          <div className="mx-auto max-w-3xl divide-y divide-border border border-border rounded-2xl bg-card">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="mx-auto max-w-3xl divide-y divide-border border border-border rounded-2xl bg-card"
+          >
             {[
               { label: "Pricing", elevate: "$499 – $2,895 transparent build cost", agency: "$8,000 – $25,000 with complex scope worksheets" },
               { label: "Timeline", elevate: "3 – 10 business days from layout signoff", agency: "8 – 16 week sluggish dev phases" },
@@ -174,30 +236,32 @@ export default function About() {
                 </div>
               </div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Metrics Section */}
-      <section className="bg-primary text-white py-16 text-center">
+      <section className="bg-primary text-white py-16 text-center overflow-hidden">
         <div className="container-page">
           <div className="grid grid-cols-2 gap-6 md:grid-cols-4">
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-              <div className="text-4xl font-extrabold text-accent font-display md:text-5xl">20+</div>
-              <div className="mt-2 text-sm text-white/80">Websites Shipped</div>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-              <div className="text-4xl font-extrabold text-accent font-display md:text-5xl">99.9%</div>
-              <div className="mt-2 text-sm text-white/80">Average Uptime</div>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-              <div className="text-4xl font-extrabold text-accent font-display md:text-5xl">3-10 days</div>
-              <div className="mt-2 text-sm text-white/80">Average delivery</div>
-            </div>
-            <div className="rounded-2xl border border-white/10 bg-white/5 p-6">
-              <div className="text-4xl font-extrabold text-accent font-display md:text-5xl">100%</div>
-              <div className="mt-2 text-sm text-white/80">Owner-managed</div>
-            </div>
+            {[
+              { stat: "20+", label: "Websites Shipped" },
+              { stat: "99.9%", label: "Average Uptime" },
+              { stat: "3-10 days", label: "Average delivery" },
+              { stat: "100%", label: "Owner-managed" }
+            ].map((metric, idx) => (
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.5, delay: idx * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                className="rounded-2xl border border-white/10 bg-white/5 p-6"
+              >
+                <div className="text-4xl font-extrabold text-accent font-display md:text-5xl">{metric.stat}</div>
+                <div className="mt-2 text-sm text-white/80">{metric.label}</div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>

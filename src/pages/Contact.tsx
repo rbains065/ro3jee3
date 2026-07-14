@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Check, Mail, Phone, MapPin, Send } from "lucide-react";
+import { motion } from "motion/react";
 import { createSubmission } from "../supabase";
 import { sendConfirmationEmail } from "../emailjs";
 
@@ -46,7 +47,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="pt-14 text-primary select-text">
+    <div className="pt-14 text-primary select-text overflow-hidden">
       {/* Breadcrumb */}
       <div className="border-b border-border bg-surface">
         <div className="container-page py-3 text-sm text-muted-foreground">
@@ -63,7 +64,13 @@ export default function Contact() {
           <div className="grid gap-12 lg:grid-cols-12 items-start">
             
             {/* Left Column info */}
-            <div className="lg:col-span-5 space-y-6">
+            <motion.div 
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-5 space-y-6"
+            >
               <span className="eyebrow">Get In Touch</span>
               <h1 className="text-3xl font-extrabold leading-tight tracking-tight text-primary font-display md:text-4xl">
                 Let's Talk About Your Project
@@ -97,10 +104,16 @@ export default function Contact() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Right Column Form */}
-            <div className="lg:col-span-7 bg-card border border-border rounded-2xl shadow-sm p-6 sm:p-8">
+            <motion.div 
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+              className="lg:col-span-7 bg-card border border-border rounded-2xl shadow-sm p-6 sm:p-8"
+            >
               {status === "success" ? (
                 <div className="text-center py-12 space-y-4">
                   <div className="inline-flex h-12 w-12 place-items-center rounded-full bg-success/15 text-success justify-center">
@@ -109,6 +122,9 @@ export default function Contact() {
                   <h3 className="text-xl font-bold font-display text-primary">Inquiry Sent Successfully!</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     Hi {formData.name}, thank you for reaching out. We have received your inquiry and Scott will email you a response at <span className="font-semibold text-primary">{formData.email}</span> within 2 hours.
+                  </p>
+                  <p className="text-xs text-accent font-semibold mt-2 animate-pulse bg-accent/10 py-2.5 px-4 rounded-xl border border-accent/20">
+                    ⚠️ Please check your **Spam or Junk folder** as our automated confirmation and initial replies may sometimes land there.
                   </p>
                   <Link to="/" className="btn-cta h-11 text-xs mt-6">
                     Return to Homepage
@@ -147,23 +163,30 @@ export default function Contact() {
                   </button>
                 </form>
               )}
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* Free Homepage mockup alert bottom block */}
-      <section className="bg-primary text-white py-16 text-center">
+      <section className="bg-primary text-white py-16 text-center overflow-hidden">
         <div className="container-page">
-          <h2 className="h2 text-white font-display">Get a custom mockup, free.</h2>
-          <p className="mt-3 text-white/80">
-            Within 48 hours of our meeting, we design and reveal a tailored custom homepage mockup of your new site.
-          </p>
-          <div className="mt-8">
-            <Link to="/free-homepage-design" className="btn-cta text-base">
-              Get My Free Mockup Design
-            </Link>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <h2 className="h2 text-white font-display">Get a custom mockup, free.</h2>
+            <p className="mt-3 text-white/80">
+              Within 48 hours of our meeting, we design and reveal a tailored custom homepage mockup of your new site.
+            </p>
+            <div className="mt-8">
+              <Link to="/free-homepage-design" className="btn-cta text-base">
+                Get My Free Mockup Design
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
     </div>

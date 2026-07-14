@@ -1,8 +1,19 @@
 import { Link } from "react-router-dom";
 import { Star, Shield, Zap, Flame, Globe, Search, Megaphone, Check, ArrowRight } from "lucide-react";
+import { motion } from "motion/react";
 import ReviewsList from "../components/ReviewsList";
 import CostCalculator from "../components/CostCalculator";
 import { PORTFOLIO_ITEMS, WEBSITES_FAQ } from "../data";
+
+// Reuse standard elegant transition physics inspired by ibelick/motion-primitives
+const revealVariants = {
+  hidden: { opacity: 0, y: 32 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
+  }
+};
 
 export default function Home() {
   return (
@@ -11,7 +22,12 @@ export default function Home() {
       <section className="relative overflow-hidden bg-white pt-24 pb-16 lg:pt-32 lg:pb-24">
         <div className="absolute inset-0 -z-10 opacity-60" style={{ background: "radial-gradient(60% 50% at 50% 0%, rgba(255,107,53,0.15), transparent 70%)" }}></div>
         <div className="container-page">
-          <div className="mx-auto max-w-4xl text-center">
+          <motion.div 
+            initial="hidden"
+            animate="visible"
+            variants={revealVariants}
+            className="mx-auto max-w-4xl text-center"
+          >
             <h1 className="text-4xl font-extrabold leading-tight tracking-tight text-primary md:text-5xl lg:text-6xl font-display">
               High-End Websites for Small Businesses That{" "}
               <span className="text-accent">Turn Clicks Into Clients.</span>
@@ -33,24 +49,36 @@ export default function Home() {
             <p className="mt-4 text-xs text-muted-foreground font-mono">
               ★ No credit card required · Shipped in 48 hours · Yours to keep
             </p>
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Core Services / Pillars */}
-      <section className="section-y bg-white">
+      <section className="section-y bg-white overflow-hidden">
         <div className="container-page">
-          <div className="mx-auto max-w-2xl text-center mb-16">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-120px" }}
+            variants={revealVariants}
+            className="mx-auto max-w-2xl text-center mb-16"
+          >
             <span className="eyebrow">Our Services</span>
             <h2 className="h2 mt-4 text-primary">Two categories. One-stop execution.</h2>
             <p className="mt-3 text-muted-foreground">
               Everything you need to look professional online and capture customers who are actively searching for what you do.
             </p>
-          </div>
+          </motion.div>
 
           <div className="grid gap-8 md:grid-cols-2">
             {/* Website Design */}
-            <div className="rounded-2xl border border-border bg-card p-8 hover:border-accent transition-all group">
+            <motion.div 
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+              className="rounded-2xl border border-border bg-card p-8 hover:border-accent transition-all group"
+            >
               <div className="grid h-12 w-12 place-items-center rounded-xl bg-accent/10 text-accent group-hover:bg-accent group-hover:text-white transition-all">
                 <Globe className="h-6 w-6" />
               </div>
@@ -64,10 +92,16 @@ export default function Home() {
                   Web Services →
                 </Link>
               </div>
-            </div>
+            </motion.div>
 
             {/* Local SEO & Support */}
-            <div className="rounded-2xl border border-border bg-card p-8 hover:border-accent transition-all group">
+            <motion.div 
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+              className="rounded-2xl border border-border bg-card p-8 hover:border-accent transition-all group"
+            >
               <div className="grid h-12 w-12 place-items-center rounded-xl bg-accent/10 text-accent group-hover:bg-accent group-hover:text-white transition-all">
                 <Search className="h-6 w-6" />
               </div>
@@ -81,39 +115,61 @@ export default function Home() {
                   Maintenance Plans →
                 </Link>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
       {/* The Math / Interactive Calculator */}
-      <section id="calculator" className="section-y bg-white scroll-mt-20">
+      <section id="calculator" className="section-y bg-white scroll-mt-20 overflow-hidden">
         <div className="container-page">
-          <div className="mx-auto max-w-3xl mb-12 text-center">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-120px" }}
+            variants={revealVariants}
+            className="mx-auto max-w-3xl mb-12 text-center"
+          >
             <span className="eyebrow">Price Transparency</span>
             <h2 className="h2 mt-4 text-primary">No mystery. No sales call required.</h2>
             <p className="mt-3 text-muted-foreground">
               Most digital agencies hide their pricing to sell you on a call. We put our quote builder online. Pick your pages and add-ons; the totals update instantly.
             </p>
-          </div>
+          </motion.div>
 
-          <div className="mx-auto max-w-3xl">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.98, y: 16 }}
+            whileInView={{ opacity: 1, scale: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] }}
+            className="mx-auto max-w-3xl"
+          >
             <CostCalculator />
-          </div>
+          </motion.div>
         </div>
       </section>
 
-      {/* Delivery Process */}
-
       {/* FAQ */}
-      <section className="section-y bg-surface">
+      <section className="section-y bg-surface overflow-hidden">
         <div className="container-page">
-          <div className="mx-auto max-w-2xl text-center mb-12">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-120px" }}
+            variants={revealVariants}
+            className="mx-auto max-w-2xl text-center mb-12"
+          >
             <span className="eyebrow">FAQ</span>
             <h2 className="h2 mt-4 text-primary">Web Design & Support FAQ</h2>
-          </div>
+          </motion.div>
 
-          <div className="mx-auto max-w-3xl rounded-2xl border border-border bg-card divide-y divide-border">
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="mx-auto max-w-3xl rounded-2xl border border-border bg-card divide-y divide-border"
+          >
             {WEBSITES_FAQ.slice(0, 6).map((faq, index) => (
               <details key={index} className="group p-6 focus:outline-none">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold text-primary hover:text-accent font-display text-lg">
@@ -125,14 +181,20 @@ export default function Home() {
                 </p>
               </details>
             ))}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Bottom CTA Block */}
-      <section className="bg-primary text-white py-16 md:py-24 text-center">
+      <section className="bg-primary text-white py-16 md:py-24 text-center overflow-hidden">
         <div className="container-page">
-          <div className="mx-auto max-w-3xl">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={revealVariants}
+            className="mx-auto max-w-3xl"
+          >
             <h2 className="text-3xl font-extrabold text-white md:text-4xl lg:text-5xl font-display">
               Get Your Free Custom Homepage Mockup
             </h2>
@@ -153,7 +215,7 @@ export default function Home() {
                 (437) 830-9393
               </a>
             </p>
-          </div>
+          </motion.div>
         </div>
       </section>
     </div>

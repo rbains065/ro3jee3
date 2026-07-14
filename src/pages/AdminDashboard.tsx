@@ -18,8 +18,26 @@ import {
   Sparkles,
   ArrowLeft
 } from "lucide-react";
+import { motion } from "motion/react";
 import { getSubmissions, clearLocalSubmissions, Submission, supabase } from "../supabase";
 import { getEmailLogs, clearEmailLogs, EmailLog } from "../emailjs";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: { 
+    opacity: 1,
+    transition: { staggerChildren: 0.05 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] }
+  }
+};
 
 export default function AdminDashboard() {
   const [submissions, setSubmissions] = useState<Submission[]>([]);
@@ -108,11 +126,16 @@ CREATE POLICY "Allow authenticated reads" ON public.submissions
 `;
 
   return (
-    <main className="pt-20 pb-16 bg-surface min-h-screen text-primary select-text">
-      <div className="container-page max-w-6xl">
+    <main className="pt-20 pb-16 bg-surface min-h-screen text-primary select-text overflow-hidden">
+      <motion.div 
+        initial="hidden"
+        animate="visible"
+        variants={containerVariants}
+        className="container-page max-w-6xl"
+      >
         
         {/* Top Header Navigation */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+        <motion.div variants={itemVariants} className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
           <div>
             <div className="flex items-center gap-2 text-xs text-muted-foreground mb-1">
               <Link to="/" className="hover:text-accent flex items-center gap-1">
@@ -138,7 +161,7 @@ CREATE POLICY "Allow authenticated reads" ON public.submissions
               Refresh Data
             </button>
           </div>
-        </div>
+        </motion.div>
 
         {/* Integration Status Grid */}
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 mb-8">
@@ -498,7 +521,7 @@ CREATE POLICY "Allow authenticated reads" ON public.submissions
           </div>
         )}
 
-      </div>
+      </motion.div>
     </main>
   );
 }

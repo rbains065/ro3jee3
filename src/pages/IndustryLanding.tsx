@@ -1,7 +1,17 @@
 import { useParams, Link } from "react-router-dom";
 import { Star, ShieldCheck, Zap, Globe, MessageSquare, ArrowRight, Check } from "lucide-react";
+import { motion } from "motion/react";
 import CostCalculator from "../components/CostCalculator";
 import ReviewsList from "../components/ReviewsList";
+
+const revealVariants = {
+  hidden: { opacity: 0, y: 32 },
+  visible: { 
+    opacity: 1, 
+    y: 0,
+    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
+  }
+};
 
 interface IndustryContent {
   title: string;
@@ -177,7 +187,7 @@ export default function IndustryLanding() {
   };
 
   return (
-    <div className="pt-14 text-primary select-text">
+    <div className="pt-14 text-primary select-text overflow-hidden">
       {/* Breadcrumb */}
       <div className="border-b border-border bg-surface">
         <div className="container-page py-3 text-sm text-muted-foreground">
@@ -193,69 +203,113 @@ export default function IndustryLanding() {
       <section className="relative overflow-hidden bg-white py-12 lg:py-16">
         <div className="absolute inset-0 -z-10 opacity-55" style={{ background: "radial-gradient(60% 50% at 50% 0%, rgba(255,107,53,0.12), transparent 70%)" }}></div>
         <div className="container-page text-center max-w-3xl">
-          <span className="eyebrow">
-            <Globe className="h-3.5 w-3.5" /> {content.category}
-          </span>
-          <h1 className="mt-4 text-3xl font-extrabold leading-tight text-primary md:text-4xl lg:text-5xl font-display">
-            {content.title}
-          </h1>
-          <p className="mt-4 text-base text-muted-foreground leading-relaxed">
-            {content.desc}
-          </p>
-          <div className="mt-8 flex justify-center">
-            <Link to="/free-homepage-design" className="btn-cta text-sm">
-              Get a Free Homepage Design mockup
-            </Link>
-          </div>
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={revealVariants}
+          >
+            <span className="eyebrow">
+              <Globe className="h-3.5 w-3.5" /> {content.category}
+            </span>
+            <h1 className="mt-4 text-3xl font-extrabold leading-tight text-primary md:text-4xl lg:text-5xl font-display">
+              {content.title}
+            </h1>
+            <p className="mt-4 text-base text-muted-foreground leading-relaxed">
+              {content.desc}
+            </p>
+            <div className="mt-8 flex justify-center">
+              <Link to="/free-homepage-design" className="btn-cta text-sm">
+                Get a Free Homepage Design mockup
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Benefits */}
-      <section className="section-y bg-surface">
+      <section className="section-y bg-surface overflow-hidden">
         <div className="container-page max-w-3xl">
-          <div className="text-center mb-10">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-120px" }}
+            variants={revealVariants}
+            className="text-center mb-10"
+          >
             <h2 className="h2 text-primary">Core must-haves we deploy.</h2>
-          </div>
+          </motion.div>
           <div className="grid gap-4 sm:grid-cols-2">
             {content.benefits.map((text, idx) => (
-              <div key={idx} className="flex items-start gap-3 rounded-xl border border-border bg-card p-5 shadow-sm">
+              <motion.div 
+                key={idx} 
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.5, delay: idx * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                className="flex items-start gap-3 rounded-xl border border-border bg-card p-5 shadow-sm"
+              >
                 <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-success/15 text-success">
                   <Check className="h-3.5 w-3.5" />
                 </span>
                 <span className="text-sm font-semibold text-primary/90 leading-normal">{text}</span>
-              </div>
+              </motion.div>
             ))}
           </div>
 
-          <div className="mt-8 rounded-xl bg-accent/15 border border-accent/30 p-4 text-center text-sm font-bold text-accent">
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="mt-8 rounded-xl bg-accent/15 border border-accent/30 p-4 text-center text-sm font-bold text-accent"
+          >
             ★ {content.stat}
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Interactive Calculator */}
-      <section className="section-y bg-white">
+      <section className="section-y bg-white overflow-hidden">
         <div className="container-page">
-          <div className="mx-auto max-w-2xl text-center mb-10">
+          <motion.div 
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-120px" }}
+            variants={revealVariants}
+            className="mx-auto max-w-2xl text-center mb-10"
+          >
             <h2 className="h2 text-primary">Calculate your setup and monthly cost</h2>
             <p className="mt-3 text-muted-foreground">Select extra pages, branding assets, and optional support packages below.</p>
-          </div>
-          <div className="mx-auto max-w-3xl">
+          </motion.div>
+          <motion.div 
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+            className="mx-auto max-w-3xl"
+          >
             <CostCalculator />
-          </div>
+          </motion.div>
         </div>
       </section>
 
       {/* Footer CTA */}
-      <section className="bg-primary text-white py-16 text-center">
+      <section className="bg-primary text-white py-16 text-center overflow-hidden">
         <div className="container-page">
-          <h2 className="h2 text-white font-display">Ready to stand out?</h2>
-          <p className="mt-3 text-white/80">We design a custom homepage mockup for your business in 48 hours. Free of cost.</p>
-          <div className="mt-8">
-            <Link to="/free-homepage-design" className="btn-cta text-base">
-              Get My Free Homepage Mockup
-            </Link>
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <h2 className="h2 text-white font-display">Ready to stand out?</h2>
+            <p className="mt-3 text-white/80">We design a custom homepage mockup for your business in 48 hours. Free of cost.</p>
+            <div className="mt-8">
+              <Link to="/free-homepage-design" className="btn-cta text-base">
+                Get My Free Homepage Mockup
+              </Link>
+            </div>
+          </motion.div>
         </div>
       </section>
     </div>
