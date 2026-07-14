@@ -57,18 +57,41 @@ export default function AdminDashboard() {
     return sessionStorage.getItem("admin_authenticated") === "true";
   });
   const [passcodeError, setPasscodeError] = useState("");
+  const [isPasscodeDefault, setIsPasscodeDefault] = useState(false);
 
-  const ADMIN_PASSCODE = (import.meta as any).env.VITE_ADMIN_PASSCODE || "admin123";
-  const isPasscodeDefault = !(import.meta as any).env.VITE_ADMIN_PASSCODE;
+  // Check if ADMIN_PASSCODE is default fallback
+  useEffect(() => {
+    fetch("/api/admin-status")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && typeof data.isPasscodeDefault === "boolean") {
+          setIsPasscodeDefault(data.isPasscodeDefault);
+        }
+      })
+      .catch((err) => {
+        console.error("Failed to fetch admin status:", err);
+      });
+  }, []);
 
-  const handleAuthenticate = (e: React.FormEvent) => {
+  const handleAuthenticate = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (inputPasscode === ADMIN_PASSCODE) {
-      sessionStorage.setItem("admin_authenticated", "true");
-      setIsAuthenticated(true);
-      setPasscodeError("");
-    } else {
-      setPasscodeError("Incorrect passcode. Please try again.");
+    try {
+      const response = await fetch("/api/verify-passcode", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ passcode: inputPasscode }),
+      });
+      const data = await response.json();
+      if (response.ok && data.success) {
+        sessionStorage.setItem("admin_authenticated", "true");
+        setIsAuthenticated(true);
+        setPasscodeError("");
+      } else {
+        setPasscodeError(data.error || "Incorrect passcode. Please try again.");
+      }
+    } catch (err) {
+      console.error("Auth request failed:", err);
+      setPasscodeError("Server connection error. Please try again.");
     }
   };
 
@@ -220,14 +243,14 @@ CREATE POLICY "Allow authenticated reads" ON public.submissions
             </button>
           </form>
 
-          {/* Info Banner about VITE_ADMIN_PASSCODE */}
+          {/* Info Banner about ADMIN_PASSCODE */}
           <div className="mt-6 border-t border-border pt-4 text-center">
             {isPasscodeDefault ? (
               <div className="rounded-lg bg-warning/10 border border-warning/20 p-3 text-left">
                 <p className="text-[11px] leading-relaxed text-warning/80 flex gap-1.5 items-start">
                   <ShieldAlert className="h-4 w-4 text-warning shrink-0 mt-0.5" />
                   <span>
-                    <strong>Currently using default fallback passcode.</strong> To secure this page properly, add the <code>VITE_ADMIN_PASSCODE</code> variable to your environment configuration.
+                    <strong>Currently using default fallback passcode.</strong> To secure this page properly, add the <code>ADMIN_PASSCODE</code> variable to your environment configuration.
                   </span>
                 </p>
               </div>
@@ -267,7 +290,7 @@ CREATE POLICY "Allow authenticated reads" ON public.submissions
             <div>
               <p className="text-sm font-bold">Unsecured Fallback Active</p>
               <p className="text-xs text-muted-foreground mt-0.5">
-                The admin panel is currently using the default fallback passcode ("admin123"). Please configure the <code>VITE_ADMIN_PASSCODE</code> environment variable to use your own secure master passcode.
+                The admin panel is currently using the default fallback passcode ("admin123"). Please configure the <code>ADMIN_PASSCODE</code> environment variable to use your own secure master passcode.
               </p>
             </div>
           </motion.div>
