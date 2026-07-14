@@ -58,31 +58,63 @@ export default function AdminDashboard() {
   });
   const [passcodeError, setPasscodeError] = useState("");
   const [isPasscodeDefault, setIsPasscodeDefault] = useState(false);
+  const [isClientSideAuth, setIsClientSideAuth] = useState(false);
 
-  // Check if ADMIN_PASSCODE is default fallback
+  // Check if ADMIN_PASSCODE is default fallback (with graceful client-side fallbacks for static hosting like Vercel)
   useEffect(() => {
     fetch("/api/admin-status")
-      .then((res) => res.json())
+      .then((res) => {
+        const contentType = res.headers.get("content-type");
+        if (!res.ok || !contentType || !contentType.includes("application/json")) {
+          throw new Error("Endpoint not available or didn't return JSON (e.g. Vercel SPA rewrite fallback)");
+        }
+        return res.json();
+      })
       .then((data) => {
         if (data && typeof data.isPasscodeDefault === "boolean") {
           setIsPasscodeDefault(data.isPasscodeDefault);
+          setIsClientSideAuth(false);
         }
       })
       .catch((err) => {
-        console.error("Failed to fetch admin status:", err);
+        console.log("Using static client-side authentication mode (e.g. Vercel SPA or CDN hosting).", err);
+        setIsClientSideAuth(true);
+        // Fall back to checking VITE_ADMIN_PASSCODE client-side
+        const clientPasscode = (import.meta as any).env.VITE_ADMIN_PASSCODE;
+        setIsPasscodeDefault(!clientPasscode);
       });
   }, []);
 
   const handleAuthenticate = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (isClientSideAuth) {
+      // Direct client-side verification for static hosts like Vercel
+      const clientPasscode = (import.meta as any).env.VITE_ADMIN_PASSCODE || "admin123";
+      if (inputPasscode === clientPasscode) {
+        sessionStorage.setItem("admin_authenticated", "true");
+        setIsAuthenticated(true);
+        setPasscodeError("");
+      } else {
+        setPasscodeError("Incorrect passcode. Please try again.");
+      }
+      return;
+    }
+
     try {
       const response = await fetch("/api/verify-passcode", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ passcode: inputPasscode }),
       });
+      
+      const contentType = response.headers.get("content-type");
+      if (!response.ok || !contentType || !contentType.includes("application/json")) {
+        throw new Error("Server returned non-JSON response");
+      }
+
       const data = await response.json();
-      if (response.ok && data.success) {
+      if (data.success) {
         sessionStorage.setItem("admin_authenticated", "true");
         setIsAuthenticated(true);
         setPasscodeError("");
@@ -90,8 +122,16 @@ export default function AdminDashboard() {
         setPasscodeError(data.error || "Incorrect passcode. Please try again.");
       }
     } catch (err) {
-      console.error("Auth request failed:", err);
-      setPasscodeError("Server connection error. Please try again.");
+      console.warn("Server-side auth failed, trying static client-side fallback:", err);
+      // Fallback in case of server/network hiccups
+      const clientPasscode = (import.meta as any).env.VITE_ADMIN_PASSCODE || "admin123";
+      if (inputPasscode === clientPasscode) {
+        sessionStorage.setItem("admin_authenticated", "true");
+        setIsAuthenticated(true);
+        setPasscodeError("");
+      } else {
+        setPasscodeError("Incorrect passcode. Please try again.");
+      }
     }
   };
 
