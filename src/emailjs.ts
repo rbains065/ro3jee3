@@ -65,9 +65,18 @@ export async function sendConfirmationEmail(params: {
   if (isEmailJSConfigured) {
     try {
       // Structure template parameters for EmailJS
+      // Pass multiple keys to handle whatever placeholder the user created in their EmailJS dashboard template (e.g. {{email}}, {{to_email}}, {{user_email}}, {{to}})
       const templateParams = {
         to_email: params.to_email,
+        email: params.to_email,
+        user_email: params.to_email,
+        to: params.to_email,
+        recipient_email: params.to_email,
+        
         to_name: params.to_name,
+        name: params.to_name,
+        user_name: params.to_name,
+        
         subject: params.subject,
         message: params.message,
         reply_to: "support@buildora.ca"
