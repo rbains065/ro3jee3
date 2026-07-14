@@ -16,7 +16,11 @@ import {
   FileText, 
   MessageSquare,
   Sparkles,
-  ArrowLeft
+  ArrowLeft,
+  Lock,
+  Unlock,
+  ShieldAlert,
+  LogOut
 } from "lucide-react";
 import { motion } from "motion/react";
 import { getSubmissions, clearLocalSubmissions, Submission, supabase } from "../supabase";
@@ -47,6 +51,35 @@ export default function AdminDashboard() {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeTab, setActiveTab] = useState<"submissions" | "emails" | "setup">("submissions");
 
+  // Passcode security states
+  const [inputPasscode, setInputPasscode] = useState("");
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    return sessionStorage.getItem("admin_authenticated") === "true";
+  });
+  const [passcodeError, setPasscodeError] = useState("");
+
+  const ADMIN_PASSCODE = (import.meta as any).env.VITE_ADMIN_PASSCODE || "admin123";
+  const isPasscodeDefault = !(import.meta as any).env.VITE_ADMIN_PASSCODE;
+
+  const handleAuthenticate = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (inputPasscode === ADMIN_PASSCODE) {
+      sessionStorage.setItem("admin_authenticated", "true");
+      setIsAuthenticated(true);
+      setPasscodeError("");
+    } else {
+      setPasscodeError("Incorrect passcode. Please try again.");
+    }
+  };
+
+  const handleSignOut = () => {
+    if (window.confirm("Are you sure you want to lock the admin panel?")) {
+      sessionStorage.removeItem("admin_authenticated");
+      setIsAuthenticated(false);
+      setInputPasscode("");
+    }
+  };
+
   // Connection check
   const isSupabaseConnected = !!supabase;
   const isEmailJSConnected = 
@@ -68,8 +101,10 @@ export default function AdminDashboard() {
   };
 
   useEffect(() => {
-    loadData();
-  }, []);
+    if (isAuthenticated) {
+      loadData();
+    }
+  }, [isAuthenticated]);
 
   const handleClearLocal = () => {
     if (window.confirm("Are you sure you want to clear all browser-saved submissions? This will not affect Supabase database records.")) {
@@ -125,6 +160,94 @@ CREATE POLICY "Allow authenticated reads" ON public.submissions
   FOR SELECT TO anon USING (true); -- Set up proper authenticated role in production!
 `;
 
+  if (!isAuthenticated) {
+    return (
+      <main className="pt-24 pb-16 bg-surface min-h-screen text-primary flex items-center justify-center select-text overflow-hidden px-4">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95, y: 16 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          className="w-full max-w-md rounded-2xl border border-border bg-card p-6 md:p-8 shadow-lg relative overflow-hidden"
+        >
+          {/* Top orange gradient accent */}
+          <div className="absolute top-0 left-0 right-0 h-1.5 bg-accent"></div>
+          
+          <div className="text-center">
+            <div className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-accent/10 text-accent mb-4">
+              <Lock className="h-6 w-6" />
+            </div>
+            
+            <h1 className="text-2xl font-bold font-display text-primary">Admin Control Center</h1>
+            <p className="text-xs text-muted-foreground mt-2 max-w-xs mx-auto">
+              Please enter the master passcode to view form submissions, email simulation logs, and active configurations.
+            </p>
+          </div>
+
+          <form onSubmit={handleAuthenticate} className="mt-6 space-y-4">
+            <div>
+              <label className="block text-xs font-bold text-muted-foreground uppercase tracking-wider mb-1.5">
+                Passcode
+              </label>
+              <input
+                type="password"
+                required
+                value={inputPasscode}
+                onChange={(e) => {
+                  setInputPasscode(e.target.value);
+                  if (passcodeError) setPasscodeError("");
+                }}
+                placeholder="••••••••"
+                className={`w-full h-11 px-4 rounded-xl border bg-surface text-sm focus:outline-none transition-all ${
+                  passcodeError 
+                    ? "border-destructive focus:ring-1 focus:ring-destructive" 
+                    : "border-border focus:border-accent focus:ring-1 focus:ring-accent"
+                }`}
+              />
+              {passcodeError && (
+                <p className="mt-1.5 text-xs text-destructive flex items-center gap-1 font-medium">
+                  <ShieldAlert className="h-3.5 w-3.5 shrink-0" />
+                  {passcodeError}
+                </p>
+              )}
+            </div>
+
+            <button
+              type="submit"
+              className="btn-cta w-full h-11 text-sm font-bold flex items-center justify-center gap-2"
+            >
+              <Unlock className="h-4 w-4" />
+              Unlock Dashboard
+            </button>
+          </form>
+
+          {/* Info Banner about VITE_ADMIN_PASSCODE */}
+          <div className="mt-6 border-t border-border pt-4 text-center">
+            {isPasscodeDefault ? (
+              <div className="rounded-lg bg-warning/10 border border-warning/20 p-3 text-left">
+                <p className="text-[11px] leading-relaxed text-warning/80 flex gap-1.5 items-start">
+                  <ShieldAlert className="h-4 w-4 text-warning shrink-0 mt-0.5" />
+                  <span>
+                    <strong>Currently using default fallback passcode.</strong> To secure this page properly, add the <code>VITE_ADMIN_PASSCODE</code> variable to your environment configuration.
+                  </span>
+                </p>
+              </div>
+            ) : (
+              <p className="text-[10px] text-muted-foreground flex items-center justify-center gap-1.5 font-mono">
+                <span>🔒 Passcode secured via environment</span>
+              </p>
+            )}
+          </div>
+          
+          <div className="mt-4 text-center">
+            <Link to="/" className="text-xs text-muted-foreground hover:text-accent font-semibold inline-flex items-center gap-1">
+              ← Back to homepage
+            </Link>
+          </div>
+        </motion.div>
+      </main>
+    );
+  }
+
   return (
     <main className="pt-20 pb-16 bg-surface min-h-screen text-primary select-text overflow-hidden">
       <motion.div 
@@ -134,6 +257,22 @@ CREATE POLICY "Allow authenticated reads" ON public.submissions
         className="container-page max-w-6xl"
       >
         
+        {/* Passcode Reminder Banner */}
+        {isPasscodeDefault && (
+          <motion.div 
+            variants={itemVariants}
+            className="mb-6 p-4 rounded-xl border border-warning/20 bg-warning/5 text-warning flex items-start gap-3"
+          >
+            <ShieldAlert className="h-5 w-5 text-warning shrink-0 mt-0.5" />
+            <div>
+              <p className="text-sm font-bold">Unsecured Fallback Active</p>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                The admin panel is currently using the default fallback passcode ("admin123"). Please configure the <code>VITE_ADMIN_PASSCODE</code> environment variable to use your own secure master passcode.
+              </p>
+            </div>
+          </motion.div>
+        )}
+
         {/* Top Header Navigation */}
         <motion.div variants={itemVariants} className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
           <div>
@@ -151,7 +290,7 @@ CREATE POLICY "Allow authenticated reads" ON public.submissions
               Consolidated workspace containing form submissions, client-directed confirmation logs, and API status monitoring.
             </p>
           </div>
-
+ 
           <div className="flex items-center gap-2 self-start md:self-auto">
             <button 
               onClick={loadData}
@@ -159,6 +298,14 @@ CREATE POLICY "Allow authenticated reads" ON public.submissions
             >
               <RefreshCw className={`h-3.5 w-3.5 ${loading ? "animate-spin" : ""}`} />
               Refresh Data
+            </button>
+            <button 
+              onClick={handleSignOut}
+              className="px-4 h-10 inline-flex items-center gap-2 rounded-lg border border-border bg-destructive/5 hover:border-destructive hover:bg-destructive/10 text-xs font-bold transition-all text-destructive"
+              title="Lock admin dashboard"
+            >
+              <LogOut className="h-3.5 w-3.5" />
+              Lock Panel
             </button>
           </div>
         </motion.div>

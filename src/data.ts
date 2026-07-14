@@ -259,33 +259,3 @@ export const REVIEWS: Review[] = [
     businessName: "Out of the Woods · Canada"
   }
 ];
-
-export const PORTFOLIO_ITEMS = [
-  {
-    name: "Lakeland Millwork",
-    type: "Custom Cabinetry & Millwork",
-    location: "Muskoka, ON",
-    image: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=800&auto=format&fit=crop",
-    description: "Bespoke architectural woodworking portfolio showcasing premium cottage builds and custom cabinetry.",
-    stat: "2.5x more design inquiries",
-    slug: "lakeland-millwork"
-  },
-  {
-    name: "JEM HR",
-    type: "Professional Consulting",
-    location: "Toronto, ON",
-    image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800&auto=format&fit=crop",
-    description: "Clean corporate services platform with self-serve client resources and booking tools.",
-    stat: "40% faster onboarding",
-    slug: "jem-hr"
-  },
-  {
-    name: "Calder Contracting",
-    type: "Contractor",
-    location: "Newmarket, ON",
-    image: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=800&auto=format&fit=crop",
-    description: "Heavy-duty contracting visual showcase designed to attract commercial clients.",
-    stat: "3x contact form submissions",
-    slug: "calder-contracting"
-  }
-];

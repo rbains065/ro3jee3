@@ -3,7 +3,7 @@ import { Star, Shield, Zap, Flame, Globe, Search, Megaphone, Check, ArrowRight }
 import { motion } from "motion/react";
 import ReviewsList from "../components/ReviewsList";
 import CostCalculator from "../components/CostCalculator";
-import { PORTFOLIO_ITEMS, WEBSITES_FAQ } from "../data";
+import { WEBSITES_FAQ } from "../data";
 
 // Reuse standard elegant transition physics inspired by ibelick/motion-primitives
 const revealVariants = {

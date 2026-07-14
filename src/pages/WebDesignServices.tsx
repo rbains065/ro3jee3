@@ -98,47 +98,6 @@ export default function WebDesignServices() {
         </div>
       </section>
 
-      {/* Design Showcase */}
-      <section className="section-y bg-white overflow-hidden">
-        <div className="container-page text-center">
-          <motion.div 
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-120px" }}
-            variants={revealVariants}
-            className="mx-auto max-w-2xl mb-12"
-          >
-            <span className="eyebrow">Portfolio</span>
-            <h2 className="h2 mt-4 text-primary">Look at what we've shipped.</h2>
-          </motion.div>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 max-w-5xl mx-auto">
-            {[
-              { name: "Calder Contracting", type: "Contractor", img: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=600&auto=format&fit=crop", stat: "3x form submissions" },
-              { name: "Lakeland Millwork", type: "Millwork", img: "https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=600&auto=format&fit=crop", stat: "2.5x more design inquiries" },
-              { name: "JEM HR", type: "Professional Services", img: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=600&auto=format&fit=crop", stat: "40% faster onboarding" }
-            ].map((p, i) => (
-              <motion.div 
-                key={i} 
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.6, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="rounded-xl border border-border overflow-hidden bg-card text-left shadow-sm"
-              >
-                <img src={p.img} alt={p.name} className="aspect-[16/10] w-full object-cover" />
-                <div className="p-4 flex items-center justify-between border-t border-border">
-                  <div>
-                    <h4 className="font-bold text-sm text-primary font-display">{p.name}</h4>
-                    <span className="text-[10px] uppercase font-bold text-accent">{p.type}</span>
-                  </div>
-                  <span className="text-xs font-bold text-success font-mono">{p.stat}</span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* FAQ */}
       <section className="section-y bg-surface overflow-hidden">
         <div className="container-page">

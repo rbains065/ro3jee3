@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Check, Star, ShieldCheck, Mail, Phone, Calendar } from "lucide-react";
-import { PORTFOLIO_ITEMS } from "../data";
 import { createSubmission } from "../supabase";
 import { sendConfirmationEmail } from "../emailjs";
 
@@ -225,26 +224,7 @@ export default function FreeHomepageDesign() {
         </div>
       </div>
 
-      {/* Trust banner */}
-      <section className="border-t border-border bg-surface py-12">
-        <div className="container-page text-center">
-          <p className="text-sm font-bold text-muted-foreground uppercase tracking-wider mb-6">
-            Recent layout mockups and case studies
-          </p>
-          <div className="grid gap-6 sm:grid-cols-3 max-w-4xl mx-auto">
-            {PORTFOLIO_ITEMS.slice(0, 3).map((item) => (
-              <div key={item.slug} className="rounded-xl border border-border bg-card overflow-hidden shadow-sm text-left">
-                <img src={item.image} alt={item.name} className="aspect-[16/10] w-full object-cover" />
-                <div className="p-4">
-                  <div className="text-[10px] font-bold text-accent uppercase tracking-wider">{item.type}</div>
-                  <h4 className="font-bold text-primary font-display mt-1">{item.name}</h4>
-                  <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{item.description}</p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+
     </main>
   );
 }
