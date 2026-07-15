@@ -127,7 +127,7 @@ export default function About() {
                 <strong>The DIY page-builder approach:</strong> Wix, Squarespace, GoDaddy. You spend 40 hours of your own time dragging components around. The result looks identical to every other template, loads slowly on mobile, fails Google's Core Web Vitals, and doesn't claim local map packs properly.
               </p>
               <p>
-                Buildora represents the modern approach. Custom-coded, fast React SPAs starting at CA$499, shipped in 3–10 business days. Direct developer emails. Compounding local SEO retainer packages. 100% owned by you.
+                Buildora represents the modern approach. Custom-coded, fast React SPAs starting at CA$399, shipped in 3–10 business days. Direct developer emails. Compounding local SEO retainer packages. 100% owned by you.
               </p>
             </div>
           </motion.div>
@@ -211,7 +211,7 @@ export default function About() {
             className="mx-auto max-w-3xl divide-y divide-border border border-border rounded-2xl bg-card"
           >
             {[
-              { label: "Pricing", elevate: "$499 – $2,895 transparent build cost", agency: "$8,000 – $25,000 with complex scope worksheets" },
+              { label: "Pricing", elevate: "$399 – $1,499 transparent build cost", agency: "$8,000 – $25,000 with complex scope worksheets" },
               { label: "Timeline", elevate: "3 – 10 business days from layout signoff", agency: "8 – 16 week sluggish dev phases" },
               { label: "Backends", elevate: "Custom, lightweight React framework builds", agency: "Rigid theme setups or heavy CMS software overrides" },
               { label: "SEO Campaign", elevate: "Foundational SEO included; detailed GBP audit", agency: "CA$2,000+ extra package at launch" },

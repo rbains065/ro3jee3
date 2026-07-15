@@ -112,7 +112,7 @@ export default function Reviews() {
           >
             <h2 className="h2 text-primary">Ready to be our next 5-star review?</h2>
             <p className="mx-auto mt-4 max-w-xl text-muted-foreground leading-relaxed">
-              Fast custom websites starting at CA$499, live in 3 to 10 days. Compounding local map pack SEO, and offline-ready social setups. Month-to-month cancel anytime.
+              Fast custom websites starting at CA$399, live in 3 to 10 days. Compounding local map pack SEO, and offline-ready social setups. Month-to-month cancel anytime.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Link to="/free-homepage-design" className="btn-cta text-base">

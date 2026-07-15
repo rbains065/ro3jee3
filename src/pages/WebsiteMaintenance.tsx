@@ -5,7 +5,7 @@ import { motion } from "motion/react";
 const MAINTENANCE_FAQ = [
   {
     q: "Do you maintain websites that you didn't build?",
-    a: "No. Maintenance, security hosting, and support are strictly bundled with custom platforms built by Buildora on our Lovable + Cloudflare stack. If you have an existing site elsewhere, we specialize in rebuilding it from scratch, which is usually cheaper than inheriting and fixing a legacy codebase."
+    a: "No. Maintenance, security hosting, and support are strictly bundled with custom platforms built by Buildora on our Vercel + Cloudflare stack. If you have an existing site elsewhere, we specialize in rebuilding it from scratch, which is usually cheaper than inheriting and fixing a legacy codebase."
   },
   {
     q: "What if my site goes down?",
@@ -164,7 +164,7 @@ export default function WebsiteMaintenance() {
             >
               <div>
                 <h3 className="text-lg font-bold text-primary font-display">Starter Care</h3>
-                <div className="mt-2 text-2xl font-extrabold text-primary">$69<span className="text-xs text-muted-foreground font-normal">/mo</span></div>
+                <div className="mt-2 text-2xl font-extrabold text-primary">$49<span className="text-xs text-muted-foreground font-normal">/mo</span></div>
                 <ul className="mt-4 space-y-2.5 text-xs text-muted-foreground border-t border-border pt-4">
                   <li className="flex items-center gap-1.5"><Check className="h-3.5 w-3.5 text-success" /> CDN Edge Hosting</li>
                   <li className="flex items-center gap-1.5"><Check className="h-3.5 w-3.5 text-success" /> SSL Management</li>
@@ -187,7 +187,7 @@ export default function WebsiteMaintenance() {
               <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-accent px-3 py-0.5 text-[10px] font-bold uppercase text-white">Recommended</span>
               <div>
                 <h3 className="text-lg font-bold text-primary font-display">Professional Care</h3>
-                <div className="mt-2 text-2xl font-extrabold text-primary">$129<span className="text-xs text-muted-foreground font-normal">/mo</span></div>
+                <div className="mt-2 text-2xl font-extrabold text-primary">$109<span className="text-xs text-muted-foreground font-normal">/mo</span></div>
                 <ul className="mt-4 space-y-2.5 text-xs text-muted-foreground border-t border-border pt-4">
                   <li className="flex items-center gap-1.5"><Check className="h-3.5 w-3.5 text-success" /> Everything in Starter</li>
                   <li className="flex items-center gap-1.5"><Check className="h-3.5 w-3.5 text-success" /> Daily Backups</li>
@@ -209,7 +209,7 @@ export default function WebsiteMaintenance() {
             >
               <div>
                 <h3 className="text-lg font-bold text-primary font-display">Custom Care</h3>
-                <div className="mt-2 text-2xl font-extrabold text-primary">$199<span className="text-xs text-muted-foreground font-normal">/mo</span></div>
+                <div className="mt-2 text-2xl font-extrabold text-primary">$179<span className="text-xs text-muted-foreground font-normal">/mo</span></div>
                 <ul className="mt-4 space-y-2.5 text-xs text-muted-foreground border-t border-border pt-4">
                   <li className="flex items-center gap-1.5"><Check className="h-3.5 w-3.5 text-success" /> Everything in Professional</li>
                   <li className="flex items-center gap-1.5"><Check className="h-3.5 w-3.5 text-success" /> 2 hours updates/mo</li>

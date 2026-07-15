@@ -203,17 +203,17 @@ export default function Pricing() {
               {
                 tier: "→ Starter",
                 q: "Do I just need a clean web presence so customers can find me, see services, and call?",
-                ans: "Starter ($499 + $69/mo). 3 pages covers home, services list, and contact information perfectly. Solo trades and independent brands thrive here."
+                ans: "Starter ($399 + $49/mo). 3 pages covers home, services list, and contact information perfectly. Solo trades and independent brands thrive here."
               },
               {
                 tier: "→ Professional",
                 q: "Do I need to actively compete for organic rankings, capture leads, and have a blog?",
-                ans: "Professional ($1,895 + $129/mo). Up to 10 pages with optimized headings, schema, lead forms, and support. Most established clinics, contractors, and hospitality businesses use this plan."
+                ans: "Professional ($999 + $109/mo). Up to 10 pages with optimized headings, schema, lead forms, and support. Most established clinics, contractors, and hospitality businesses use this plan."
               },
               {
                 tier: "→ Custom",
                 q: "Do I have multiple locations, an online shop, or complex booking integrations?",
-                ans: "Custom ($2,995+ + $199/mo). Custom scope tailored exactly to your booking CRM (e.g. Jane App, Mindbody, Boulevard) or inventory management setup."
+                ans: "Custom ($1,499+ + $179/mo). Custom scope tailored exactly to your booking CRM (e.g. Jane App, Mindbody, Boulevard) or inventory management setup."
               }
             ].map((item, index) => (
               <motion.div 
@@ -269,12 +269,12 @@ export default function Pricing() {
               <tbody className="divide-y divide-border">
                 <tr>
                   <td className="px-6 py-4 font-semibold text-primary">Setup cost</td>
-                  <td className="px-6 py-4 font-bold text-success">CA$499 – $2,895+</td>
+                  <td className="px-6 py-4 font-bold text-success">CA$399 – $1,499+</td>
                   <td className="px-6 py-4 text-muted-foreground">$8,000 – $30,000</td>
                 </tr>
                 <tr>
                   <td className="px-6 py-4 font-semibold text-primary">Monthly cost</td>
-                  <td className="px-6 py-4 font-bold text-success">CA$69 – $199/mo</td>
+                  <td className="px-6 py-4 font-bold text-success">CA$49 – $179/mo</td>
                   <td className="px-6 py-4 text-muted-foreground">$200+ managed hosting</td>
                 </tr>
                 <tr>

@@ -42,7 +42,7 @@ export default function WebDesignServices() {
               Custom Web Design That Turns Visitors Into Customers
             </h1>
             <p className="mt-4 text-base md:text-lg text-muted-foreground leading-relaxed">
-              We build lightning-fast, custom-coded React websites for small businesses. Designed for mobile-first rendering, equipped with conversion paths, and fully optimized for local Google search. Shipped in 3 to 10 days, starting at $499.
+              We build lightning-fast, custom-coded React websites for small businesses. Designed for mobile-first rendering, equipped with conversion paths, and fully optimized for local Google search. Shipped in 3 to 10 days, starting at $399.
             </p>
             <div className="mt-8 flex justify-center gap-4">
               <Link to="/free-homepage-design" className="btn-cta text-sm">

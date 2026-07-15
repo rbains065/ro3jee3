@@ -33,7 +33,7 @@ export default function Home() {
               <span className="text-accent">Turn Clicks Into Clients.</span>
             </h1>
             <p className="mx-auto mt-6 max-w-2xl text-lg md:text-xl text-muted-foreground leading-relaxed">
-              Custom-coded builds with foundational SEO included. No slow WordPress setups, no generic Wix templates. Shipped in 3 to 10 business days, starting from CA$499.
+              Custom-coded builds with foundational SEO included. No slow WordPress setups, no generic Wix templates. Shipped in 3 to 10 business days, starting from CA$399.
             </p>
 
             <div className="mt-8 flex flex-wrap justify-center gap-4">
@@ -87,7 +87,7 @@ export default function Home() {
                 Beautiful, custom-coded web design engineered for mobile devices. Shipped quickly, optimized for search engines, and built with conversion paths.
               </p>
               <div className="mt-6 pt-4 border-t border-border flex items-center justify-between text-xs">
-                <span className="font-bold text-primary">Setup from CA$499</span>
+                <span className="font-bold text-primary">Setup from CA$399</span>
                 <Link to="/web-design-services" className="text-accent font-bold hover:underline">
                   Web Services →
                 </Link>

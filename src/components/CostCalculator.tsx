@@ -5,40 +5,36 @@ export default function CostCalculator() {
   const [currency, setCurrency] = useState<"CAD" | "USD">("CAD");
   const [plan, setPlan] = useState<"starter" | "professional" | "custom">("professional");
   const [pages, setPages] = useState(10);
-  const [showGrowth, setShowGrowth] = useState(false);
   const [showAddons, setShowAddons] = useState(false);
-
-  // Growth Retainers
-  const [socialRetainer, setSocialRetainer] = useState<"none" | "starter" | "growth">("none");
 
   // One-time Add-ons
   const [logoOption, setLogoOption] = useState<"none" | "logo" | "brand">("none");
   const [customFeatures, setCustomFeatures] = useState(false);
 
   // Totals
-  const [setupTotal, setSetupTotal] = useState(1895);
-  const [monthlyTotal, setMonthlyTotal] = useState(129);
+  const [setupTotal, setSetupTotal] = useState(999);
+  const [monthlyTotal, setMonthlyTotal] = useState(109);
 
   const rate = currency === "USD" ? 0.74 : 1.0;
   const symbol = currency === "USD" ? "US$" : "CA$";
 
   // Calculate whenever anything changes
   useEffect(() => {
-    let baseSetup = 1895;
-    let baseMonthly = 129;
+    let baseSetup = 999;
+    let baseMonthly = 109;
     let planIncludedPages = 10;
 
     if (plan === "starter") {
-      baseSetup = 499;
-      baseMonthly = 69;
+      baseSetup = 399;
+      baseMonthly = 49;
       planIncludedPages = 3;
     } else if (plan === "professional") {
-      baseSetup = 1895;
-      baseMonthly = 129;
+      baseSetup = 999;
+      baseMonthly = 109;
       planIncludedPages = 10;
     } else if (plan === "custom") {
-      baseSetup = 2895;
-      baseMonthly = 199;
+      baseSetup = 1499;
+      baseMonthly = 179;
       planIncludedPages = 10;
     }
 
@@ -53,22 +49,17 @@ export default function CostCalculator() {
       }
     }
 
-    // Add Social retainer
-    let socialCost = 0;
-    if (socialRetainer === "starter") socialCost = 400;
-    else if (socialRetainer === "growth") socialCost = 800;
-
     // Add Logo or Brand Package
     let brandCost = 0;
-    if (logoOption === "logo") brandCost = 300;
-    else if (logoOption === "brand") brandCost = 800;
+    if (logoOption === "logo") brandCost = 200;
+    else if (logoOption === "brand") brandCost = 700;
 
     // Custom features
-    let customCost = customFeatures ? 400 : 0;
+    let customCost = customFeatures ? 300 : 0;
 
     setSetupTotal(Math.round((baseSetup + pageCost + brandCost + customCost) * rate));
-    setMonthlyTotal(Math.round((baseMonthly + socialCost) * rate));
-  }, [currency, plan, pages, socialRetainer, logoOption, customFeatures, rate]);
+    setMonthlyTotal(Math.round(baseMonthly * rate));
+  }, [currency, plan, pages, logoOption, customFeatures, rate]);
 
   const handlePlanChange = (selected: "starter" | "professional" | "custom") => {
     setPlan(selected);
@@ -120,7 +111,7 @@ export default function CostCalculator() {
           >
             <div className="text-sm font-bold text-primary">Starter</div>
             <div className="mt-0.5 text-xs text-muted-foreground">Up to 3 pages</div>
-            <div className="mt-1 text-sm font-bold text-accent">{symbol}{Math.round(499 * rate)}</div>
+            <div className="mt-1 text-sm font-bold text-accent">{symbol}{Math.round(399 * rate)}</div>
           </button>
           <button
             onClick={() => handlePlanChange("professional")}
@@ -128,7 +119,7 @@ export default function CostCalculator() {
           >
             <div className="text-sm font-bold text-primary">Professional</div>
             <div className="mt-0.5 text-xs text-muted-foreground">Up to 10 pages</div>
-            <div className="mt-1 text-sm font-bold text-accent">{symbol}{Math.round(1895 * rate)}</div>
+            <div className="mt-1 text-sm font-bold text-accent">{symbol}{Math.round(999 * rate)}</div>
           </button>
           <button
             onClick={() => handlePlanChange("custom")}
@@ -136,7 +127,7 @@ export default function CostCalculator() {
           >
             <div className="text-sm font-bold text-primary">Custom Scope</div>
             <div className="mt-0.5 text-xs text-muted-foreground">Tailored custom</div>
-            <div className="mt-1 text-sm font-bold text-accent">{symbol}{Math.round(2895 * rate)}+</div>
+            <div className="mt-1 text-sm font-bold text-accent">{symbol}{Math.round(1499 * rate)}+</div>
           </button>
         </div>
       </fieldset>
@@ -172,52 +163,7 @@ export default function CostCalculator() {
         </div>
       </fieldset>
 
-      {/* Growth Services Expandable */}
-      <div className="mt-5 overflow-hidden rounded-xl border border-border bg-surface/50">
-        <button
-          onClick={() => setShowGrowth(!showGrowth)}
-          className="flex w-full items-center justify-between gap-3 px-4 py-3 text-left transition hover:bg-surface focus:outline-none"
-        >
-          <div>
-            <div className="text-xs font-bold uppercase tracking-wider text-accent">
-              Growth retainers (Optional)
-            </div>
-            <p className="mt-0.5 text-xs text-muted-foreground">
-              Ongoing social media strategy to compound results.
-            </p>
-          </div>
-          {showGrowth ? <ChevronUp className="h-5 w-5 text-primary" /> : <ChevronDown className="h-5 w-5 text-primary" />}
-        </button>
 
-        {showGrowth && (
-          <div className="p-4 border-t border-border bg-card space-y-4">
-            {/* Social Retainer */}
-            <div>
-              <div className="text-sm font-semibold text-primary mb-2">Social Media Management</div>
-              <div className="grid gap-2 grid-cols-3">
-                <button
-                  onClick={() => setSocialRetainer("none")}
-                  className={`px-3 py-2 text-xs font-bold rounded-lg border ${socialRetainer === "none" ? "bg-primary text-white border-primary" : "bg-card text-primary border-border hover:border-accent"}`}
-                >
-                  No social
-                </button>
-                <button
-                  onClick={() => setSocialRetainer("starter")}
-                  className={`px-3 py-2 text-xs font-bold rounded-lg border ${socialRetainer === "starter" ? "bg-primary text-white border-primary" : "bg-card text-primary border-border hover:border-accent"}`}
-                >
-                  Starter Social (+{symbol}{Math.round(400 * rate)}/mo)
-                </button>
-                <button
-                  onClick={() => setSocialRetainer("growth")}
-                  className={`px-3 py-2 text-xs font-bold rounded-lg border ${socialRetainer === "growth" ? "bg-primary text-white border-primary" : "bg-card text-primary border-border hover:border-accent"}`}
-                >
-                  Growth Social (+{symbol}{Math.round(800 * rate)}/mo)
-                </button>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
 
       {/* Add-ons Expandable */}
       <div className="mt-4 overflow-hidden rounded-xl border border-border bg-surface/50">
@@ -249,13 +195,13 @@ export default function CostCalculator() {
                   onClick={() => setLogoOption("logo")}
                   className={`px-3 py-2 text-xs font-bold rounded-lg border ${logoOption === "logo" ? "bg-primary text-white border-primary" : "bg-card text-primary border-border hover:border-accent"}`}
                 >
-                  Logo Only (+{symbol}{Math.round(300 * rate)})
+                  Logo Only (+{symbol}{Math.round(200 * rate)})
                 </button>
                 <button
                   onClick={() => setLogoOption("brand")}
                   className={`px-3 py-2 text-xs font-bold rounded-lg border ${logoOption === "brand" ? "bg-primary text-white border-primary" : "bg-card text-primary border-border hover:border-accent"}`}
                 >
-                  Full Brand Package (+{symbol}{Math.round(800 * rate)})
+                  Full Brand Package (+{symbol}{Math.round(700 * rate)})
                 </button>
               </div>
             </div>
@@ -299,24 +245,24 @@ export default function CostCalculator() {
         <div className="mt-5 space-y-2 rounded-xl bg-white/5 p-4 text-xs font-mono">
           <div className="flex justify-between gap-3 text-white/80">
             <span>{plan.toUpperCase()} web plan setup:</span>
-            <span>{symbol}{(plan === "starter" ? 499 : plan === "professional" ? 1895 : 2895) * rate}</span>
+            <span>{symbol}{(plan === "starter" ? 399 : plan === "professional" ? 999 : 1499) * rate}</span>
           </div>
           {pages > (plan === "starter" ? 3 : 10) && (
             <div className="flex justify-between gap-3 text-white/80">
               <span>Extra pages ({pages - (plan === "starter" ? 3 : 10)}):</span>
-              <span>{symbol}{(setupTotal - ((plan === "starter" ? 499 : plan === "professional" ? 1895 : 2895) + (logoOption === "logo" ? 300 : logoOption === "brand" ? 800 : 0) + (customFeatures ? 400 : 0)) * rate)}</span>
+              <span>{symbol}{(setupTotal - ((plan === "starter" ? 399 : plan === "professional" ? 999 : 1499) + (logoOption === "logo" ? 200 : logoOption === "brand" ? 700 : 0) + (customFeatures ? 300 : 0)) * rate)}</span>
             </div>
           )}
           {logoOption !== "none" && (
             <div className="flex justify-between gap-3 text-white/80">
               <span>Branding ({logoOption === "logo" ? "Logo only" : "Full brand package"}):</span>
-              <span>{symbol}{(logoOption === "logo" ? 300 : 800) * rate}</span>
+              <span>{symbol}{(logoOption === "logo" ? 200 : 700) * rate}</span>
             </div>
           )}
           {customFeatures && (
             <div className="flex justify-between gap-3 text-white/80">
               <span>Custom features & integrations:</span>
-              <span>{symbol}{400 * rate}</span>
+              <span>{symbol}{300 * rate}</span>
             </div>
           )}
           <div className="flex justify-between gap-3 text-white border-t border-white/10 pt-2 font-bold">

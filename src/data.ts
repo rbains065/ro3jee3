@@ -46,8 +46,8 @@ export const WEBSITES_FAQ: FAQ[] = [
 export const PLANS: PricingPlan[] = [
   {
     name: "Starter",
-    setupPrice: "499",
-    monthlyPrice: "69",
+    setupPrice: "399",
+    monthlyPrice: "49",
     bestFor: "Solo operators and brand-new small businesses that need a clean web presence.",
     features: [
       "Up to 3 pages",
@@ -61,8 +61,8 @@ export const PLANS: PricingPlan[] = [
   },
   {
     name: "Professional",
-    setupPrice: "1,895",
-    monthlyPrice: "129",
+    setupPrice: "999",
+    monthlyPrice: "109",
     bestFor: "Most established small businesses, salons, restaurants, contractors, professional services that need to compete on Google.",
     features: [
       "Up to 10 pages",
@@ -78,8 +78,8 @@ export const PLANS: PricingPlan[] = [
   },
   {
     name: "Custom",
-    setupPrice: "2,895",
-    monthlyPrice: "199",
+    setupPrice: "1,499",
+    monthlyPrice: "179",
     bestFor: "Multi-location businesses, e-commerce, and complex booking or membership builds.",
     features: [
       "Multi-location ready",
@@ -98,8 +98,8 @@ export const PLANS: PricingPlan[] = [
 export const SOCIAL_PLANS = [
   {
     name: "Starter Social",
-    price: "400",
-    setup: "300",
+    price: "380",
+    setup: "200",
     bestFor: "Single-platform consistency for solo operators and new small businesses.",
     features: [
       "1 platform",
@@ -113,8 +113,8 @@ export const SOCIAL_PLANS = [
   },
   {
     name: "Growth Social",
-    price: "800",
-    setup: "400",
+    price: "780",
+    setup: "300",
     bestFor: "Established small businesses ready to compound on 2 platforms with Reels.",
     features: [
       "2 platforms",
@@ -130,8 +130,8 @@ export const SOCIAL_PLANS = [
   },
   {
     name: "Authority Social",
-    price: "1,500",
-    setup: "500",
+    price: "1,480",
+    setup: "400",
     bestFor: "Multi-platform brand presence for businesses ready to scale.",
     features: [
       "3 platforms",
@@ -149,12 +149,12 @@ export const SOCIAL_PLANS = [
 
 export const ADD_ONS = [
   { name: "Additional pages", desc: "Beyond your plan limit", price: "$150/page · $100/page when buying 3+" },
-  { name: "Logo only", desc: "Single logo mark, ready for web and print", price: "$300" },
-  { name: "Logo + brand identity", desc: "Logo, colour system, typography", price: "$500" },
-  { name: "Full brand package", desc: "Logo system + brand guidelines + social templates", price: "$800" },
-  { name: "Custom functionality", desc: "Booking, e-commerce, member portals, calculators, integrations", price: "$300+" },
+  { name: "Logo only", desc: "Single logo mark, ready for web and print", price: "$200" },
+  { name: "Logo + brand identity", desc: "Logo, colour system, typography", price: "$400" },
+  { name: "Full brand package", desc: "Logo system + brand guidelines + social templates", price: "$700" },
+  { name: "Custom functionality", desc: "Booking, e-commerce, member portals, calculators, integrations", price: "$200+" },
   { name: "Rush delivery (under 5 days)", desc: "We push your project to the front of the queue", price: "+25% on setup" },
-  { name: "Paid social ads management", desc: "Add-on to any Social plan", price: "$300/mo + ad spend" }
+  { name: "Paid social ads management", desc: "Add-on to any Social plan", price: "$280/mo + ad spend" }
 ];
 
 export const REVIEWS: Review[] = [
