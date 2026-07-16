@@ -211,8 +211,8 @@ export default function Home() {
             </div>
             <p className="mt-5 text-sm text-white/60">
               Or call us directly at{" "}
-              <a href="tel:+14378309393" className="font-semibold text-white underline underline-offset-4 hover:text-accent">
-                (437) 830-9393
+              <a href="tel:+14377849500" className="font-semibold text-white underline underline-offset-4 hover:text-accent">
+                (437) 784-9500
               </a>
             </p>
           </motion.div>

@@ -135,11 +135,11 @@ export default function Header() {
         {/* Header Right Actions */}
         <div className="flex items-center gap-2">
           {/* Phone */}
-          <a href="tel:+14378309393" className="hidden items-center gap-2 text-sm font-bold text-primary hover:text-accent lg:flex">
+          <a href="tel:+14377849500" className="hidden items-center gap-2 text-sm font-bold text-primary hover:text-accent lg:flex">
             <Phone className="h-4 w-4 text-accent" />
-            (437) 830-9393
+            (437) 784-9500
           </a>
-          <a href="tel:+14378309393" className="grid h-10 w-10 place-items-center rounded-xl border border-border lg:hidden text-primary hover:border-accent hover:text-accent">
+          <a href="tel:+14377849500" className="grid h-10 w-10 place-items-center rounded-xl border border-border lg:hidden text-primary hover:border-accent hover:text-accent">
             <Phone className="h-4 w-4" />
           </a>
 

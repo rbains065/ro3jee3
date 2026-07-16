@@ -84,7 +84,7 @@ export default function Contact() {
                   <Phone className="h-5 w-5 text-accent shrink-0 mt-0.5" />
                   <div>
                     <div className="font-semibold">Call or Text</div>
-                    <a href="tel:+14378309393" className="text-accent hover:underline">(437) 830-9393</a>
+                    <a href="tel:+14377849500" className="text-accent hover:underline">(437) 784-9500</a>
                   </div>
                 </div>
 

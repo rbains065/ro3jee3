@@ -56,6 +56,74 @@ export const clearLocalSubmissions = () => {
   localStorage.removeItem("buildora_submissions");
 };
 
+// Discord Webhook URL for booking and submission notifications
+const DISCORD_WEBHOOK_URL = "https://discord.com/api/webhooks/1527135114696462568/1ToUzTDt0OBYE3-70EAIXh-JjRuVrnGh_R1g6Ib6LwGo9WQrMYbWmsjo-Z5Zoj7XPkEU";
+
+async function sendToDiscord(submission: Submission) {
+  try {
+    const typeLabels: Record<string, string> = {
+      mockup: "🆓 Free Homepage Design Request",
+      contact: "✉️ Contact Form Submission",
+      booking: "📅 Discovery Call Booking"
+    };
+
+    const title = typeLabels[submission.type] || "🆕 New Website Submission";
+    const color = submission.type === "booking" ? 3066993 // Green
+                : submission.type === "mockup" ? 15105570 // Orange
+                : 3447003; // Blue
+
+    const fields = [
+      { name: "Name", value: submission.name || "N/A", inline: true },
+      { name: "Email", value: submission.email || "N/A", inline: true },
+      { name: "Phone", value: submission.phone || "N/A", inline: true }
+    ];
+
+    if (submission.type === "mockup" && submission.businessType) {
+      fields.push({ name: "Business Type", value: submission.businessType, inline: false });
+    }
+
+    if (submission.type === "booking") {
+      if (submission.interest) {
+        fields.push({ name: "Selected Focus", value: submission.interest, inline: true });
+      }
+      if (submission.preferredTime) {
+        fields.push({ name: "Preferred Time Frame", value: submission.preferredTime, inline: true });
+      }
+      if (submission.website) {
+        fields.push({ name: "Current Website", value: submission.website, inline: false });
+      }
+    }
+
+    if (submission.message) {
+      fields.push({ name: "Message/Notes", value: submission.message, inline: false });
+    }
+
+    const payload = {
+      embeds: [
+        {
+          title: title,
+          color: color,
+          fields: fields,
+          timestamp: submission.created_at,
+          footer: {
+            text: "Buildora Leads Bot"
+          }
+        }
+      ]
+    };
+
+    await fetch(DISCORD_WEBHOOK_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(payload)
+    });
+  } catch (err) {
+    console.error("Failed to send lead notification to Discord webhook:", err);
+  }
+}
+
 /**
  * Core function to handle saving a submission.
  * It will always save to localStorage so the admin dashboard can see it instantly.
@@ -70,6 +138,11 @@ export async function createSubmission(submissionData: Omit<Submission, "id" | "
 
   // Always save locally first to guarantee persistence in the preview
   saveToLocal(newSubmission);
+
+  // Send to Discord Webhook asynchronously (non-blocking)
+  sendToDiscord(newSubmission).catch((err) => {
+    console.error("Discord webhook dispatch error:", err);
+  });
 
   // If Supabase is configured, attempt to save to the database table "submissions"
   if (supabase) {
