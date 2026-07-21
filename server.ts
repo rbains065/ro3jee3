@@ -10,6 +10,10 @@ async function startServer() {
   app.use(express.json());
 
   // API routes
+  app.get("/google0fd9aab7e2e42477.html", (req, res) => {
+    res.type("text/html").send("google-site-verification: google0fd9aab7e2e42477.html");
+  });
+
   app.get("/api/admin-status", (req, res) => {
     res.json({
       isPasscodeDefault: !process.env.ADMIN_PASSCODE
