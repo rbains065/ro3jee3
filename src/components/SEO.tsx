@@ -17,7 +17,8 @@ export default function SEO({
   schema
 }: SEOProps) {
   const location = useLocation();
-  const currentUrl = canonical || `https://buildoradesigning.com${location.pathname}`;
+  const origin = typeof window !== "undefined" ? window.location.origin : "https://buildoradesigning.com";
+  const currentUrl = canonical || `${origin}${location.pathname}`;
 
   useEffect(() => {
     // Update Title
