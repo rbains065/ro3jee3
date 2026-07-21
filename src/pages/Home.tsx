@@ -3,6 +3,7 @@ import { Star, Shield, Zap, Flame, Globe, Search, Megaphone, Check, ArrowRight }
 import { motion } from "motion/react";
 import ReviewsList from "../components/ReviewsList";
 import CostCalculator from "../components/CostCalculator";
+import SEO from "../components/SEO";
 import { WEBSITES_FAQ } from "../data";
 
 // Reuse standard elegant transition physics inspired by ibelick/motion-primitives
@@ -18,6 +19,10 @@ const revealVariants = {
 export default function Home() {
   return (
     <div>
+      <SEO 
+        title="Custom Web Design & Local SEO Agency" 
+        description="Buildora creates ultra-fast, modern websites for local businesses, contractors, salons, and professional services. Get a free custom homepage mockup before you pay."
+      />
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-white pt-24 pb-16 lg:pt-32 lg:pb-24">
         <div className="absolute inset-0 -z-10 opacity-60" style={{ background: "radial-gradient(60% 50% at 50% 0%, rgba(255,107,53,0.15), transparent 70%)" }}></div>

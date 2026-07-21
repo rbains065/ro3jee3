@@ -3,6 +3,7 @@ import { Star, ShieldCheck, Zap, Globe, MessageSquare, ArrowRight, Check } from 
 import { motion } from "motion/react";
 import CostCalculator from "../components/CostCalculator";
 import ReviewsList from "../components/ReviewsList";
+import SEO from "../components/SEO";
 
 const revealVariants = {
   hidden: { opacity: 0, y: 32 },
@@ -188,6 +189,11 @@ export default function IndustryLanding() {
 
   return (
     <div className="pt-14 text-primary select-text overflow-hidden">
+      <SEO 
+        title={content.title}
+        description={content.desc}
+        keywords={`websites for ${slug.replace("-", " ")}, ${slug} web design, local SEO for ${slug}`}
+      />
       {/* Breadcrumb */}
       <div className="border-b border-border bg-surface">
         <div className="container-page py-3 text-sm text-muted-foreground">

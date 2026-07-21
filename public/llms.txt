@@ -1,0 +1,41 @@
+# Buildora Web Design Agency
+
+> High-performance custom web design, organic SEO, and fast local business websites.
+
+## Overview
+Buildora is a modern web design agency specializing in bespoke, high-converting websites for small businesses, contractors, salons, medspas, restaurants, professional services, and local brands. 
+
+- **Website**: https://buildoradesigning.com
+- **Phone**: (437) 784-9500
+- **Email**: jackobjack16@gmail.com
+- **Turnaround**: 3–10 business days
+
+## Core Offerings & Pricing
+
+### 1. Starter Plan ($399 setup + $49/mo)
+- Best for simple 1–3 page starter setups, landing pages, and small service businesses.
+- Includes mobile responsive design, SSL hosting, contact form, and standard performance optimization.
+
+### 2. Professional Plan ($999 setup + $109/mo)
+- Best for established small businesses, salons, contractors, restaurants, and local services competing on Google.
+- Up to 10 custom designed pages.
+- Local SEO schema markup, lead form workflows, Google Business Profile assistance, and speed optimization.
+
+### 3. Custom Scope ($1,499+ setup + $179/mo)
+- Best for multi-location businesses, custom booking CRM integrations (Jane App, Mindbody, Boulevard, Fresha), e-commerce, and advanced portals.
+
+### 4. Free Custom Homepage Mockup
+- Buildora offers a risk-free custom homepage design preview before signing contracts or paying upfront setup fees.
+
+## Tech Stack & Architecture
+- Modern React, Vite, Tailwind CSS, Vercel & Cloudflare Edge hosting.
+- Ultra-fast page speeds (95+ Lighthouse performance scores).
+- Built-in schema.org structured data for local search visibility.
+
+## Target Industries
+- Salons & Barbershops
+- Nail Salons & Medspas
+- General Contractors, Roofers, Plumbers, Electricians
+- Restaurants & Cafes
+- Lawyers & Accountants
+- Real Estate Agencies & Gyms

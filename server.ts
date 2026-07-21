@@ -9,9 +9,25 @@ async function startServer() {
   // Body parsing middleware
   app.use(express.json());
 
-  // API routes
+  // API and SEO endpoints
   app.get("/google0fd9aab7e2e42477.html", (req, res) => {
     res.type("text/html").send("google-site-verification: google0fd9aab7e2e42477.html");
+  });
+
+  app.get("/sitemap.xml", (req, res) => {
+    res.type("application/xml").sendFile(path.join(process.cwd(), "public", "sitemap.xml"));
+  });
+
+  app.get("/robots.txt", (req, res) => {
+    res.type("text/plain").sendFile(path.join(process.cwd(), "public", "robots.txt"));
+  });
+
+  app.get("/llms.txt", (req, res) => {
+    res.type("text/plain").sendFile(path.join(process.cwd(), "public", "llms.txt"));
+  });
+
+  app.get("/ai.txt", (req, res) => {
+    res.type("text/plain").sendFile(path.join(process.cwd(), "public", "ai.txt"));
   });
 
   app.get("/api/admin-status", (req, res) => {
