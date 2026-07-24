@@ -1,4 +1,4 @@
 # AI Context for Buildora
 User-agent: *
-Link: https://buildoradesigning.com/llms.txt
-Summary: Buildora provides custom web design, organic SEO, and fast websites for local businesses starting at $399. Phone: (437) 784-9500.
+Link: https://www.buildorawebdesign.com/llms.txt
+Summary: Buildora provides custom web design, local SEO, and fast websites for local businesses starting at $399. Phone: (437) 784-9500.

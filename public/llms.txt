@@ -1,13 +1,13 @@
 # Buildora Web Design Agency
 
-> High-performance custom web design, organic SEO, and fast local business websites.
+> High-performance custom web design, local SEO, and fast websites for local businesses.
 
 ## Overview
-Buildora is a modern web design agency specializing in bespoke, high-converting websites for small businesses, contractors, salons, medspas, restaurants, professional services, and local brands. 
+Buildora is a modern web design agency specializing in bespoke, high-converting websites for small businesses, contractors, salons, medspas, restaurants, professional services, and local brands.
 
-- **Website**: https://buildoradesigning.com
+- **Website**: https://www.buildorawebdesign.com
 - **Phone**: (437) 784-9500
-- **Email**: jackobjack16@gmail.com
+- **Email**: contact@buildora.ca
 - **Turnaround**: 3–10 business days
 
 ## Core Offerings & Pricing
@@ -28,7 +28,7 @@ Buildora is a modern web design agency specializing in bespoke, high-converting 
 - Buildora offers a risk-free custom homepage design preview before signing contracts or paying upfront setup fees.
 
 ## Tech Stack & Architecture
-- Modern React, Vite, Tailwind CSS, Vercel & Cloudflare Edge hosting.
+- Modern React, Vite, Tailwind CSS, high-speed Edge CDN.
 - Ultra-fast page speeds (95+ Lighthouse performance scores).
 - Built-in schema.org structured data for local search visibility.
 

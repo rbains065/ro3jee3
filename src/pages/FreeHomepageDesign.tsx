@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Check, Star, ShieldCheck, Mail, Phone, Calendar } from "lucide-react";
 import { createSubmission } from "../supabase";
 import { sendConfirmationEmail } from "../emailjs";
+import SEO from "../components/SEO";
 
 export default function FreeHomepageDesign() {
   const [formData, setFormData] = useState({
@@ -54,6 +55,10 @@ export default function FreeHomepageDesign() {
 
   return (
     <main className="pt-14 pb-16 bg-white min-h-screen text-primary select-text">
+      <SEO 
+        title="Get a Free Custom Homepage Design Mockup in 48 Hours" 
+        description="Request a free custom homepage website design mockup for your business in 48 hours. No upfront fees, no obligations, no credit card required." 
+      />
       {/* Micro Top Bar */}
       <div className="bg-surface text-center py-2 px-3 text-xs text-muted-foreground border-b border-border">
         ★ 5.0 · 29 Google reviews · Based in Toronto, ON

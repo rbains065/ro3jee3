@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Clock, Check, ShieldAlert, Video, Calendar, ShieldCheck } from "lucide-react";
 import { createSubmission } from "../supabase";
 import { sendConfirmationEmail } from "../emailjs";
+import SEO from "../components/SEO";
 
 export default function DiscoveryCall() {
   const [formData, setFormData] = useState({
@@ -53,6 +54,10 @@ export default function DiscoveryCall() {
 
   return (
     <div className="pt-14 text-primary select-text">
+      <SEO 
+        title="Book a Free 15-Minute Web Design Discovery Call" 
+        description="Book a free 15-minute discovery call with Scott Martin. Get an audit of your web presence and receive a custom homepage mockup in 48 hours." 
+      />
       {/* Breadcrumb */}
       <div className="border-b border-border bg-surface">
         <div className="container-page py-3 text-sm text-muted-foreground">

@@ -1,63 +1,42 @@
-# Robots.txt for Buildora Web Design
-# Allow standard web search engine crawlers and AI bots
-
 User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /api/
 
-# Explicitly welcome major search engine and AI crawlers
-User-agent: Googlebot
-Allow: /
-
-User-agent: Googlebot-Image
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Slurp
-Allow: /
-
-User-agent: DuckDuckBot
-Allow: /
-
-User-agent: Baiduspider
-Allow: /
-
-User-agent: Yandex
-Allow: /
-
 # AI Crawlers & Search Assistants
 User-agent: GPTBot
 Allow: /
+Disallow: /admin
+Disallow: /api/
 
 User-agent: ChatGPT-User
 Allow: /
+Disallow: /admin
+Disallow: /api/
 
 User-agent: ClaudeBot
 Allow: /
+Disallow: /admin
+Disallow: /api/
 
 User-agent: Claude-Web
 Allow: /
+Disallow: /admin
+Disallow: /api/
 
 User-agent: PerplexityBot
 Allow: /
+Disallow: /admin
+Disallow: /api/
 
 User-agent: Google-Extended
 Allow: /
+Disallow: /admin
+Disallow: /api/
 
 User-agent: Applebot
 Allow: /
+Disallow: /admin
+Disallow: /api/
 
-User-agent: Amazonbot
-Allow: /
-
-User-agent: ByteDance
-Allow: /
-
-User-agent: CCBot
-Allow: /
-
-Sitemap: /sitemap.xml
-Sitemap: https://buildoradesigning.com/sitemap.xml
+Sitemap: https://www.buildorawebdesign.com/sitemap.xml

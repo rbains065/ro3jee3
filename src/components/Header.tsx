@@ -135,12 +135,20 @@ export default function Header() {
         {/* Header Right Actions */}
         <div className="flex items-center gap-2">
           {/* Phone */}
-          <a href="tel:+14377849500" className="hidden items-center gap-2 text-sm font-bold text-primary hover:text-accent lg:flex">
-            <Phone className="h-4 w-4 text-accent" />
+          <a
+            href="tel:+14377849500"
+            aria-label="Call Buildora at (437) 784-9500"
+            className="hidden items-center gap-2 text-sm font-bold text-primary hover:text-accent lg:flex"
+          >
+            <Phone className="h-4 w-4 text-accent" aria-hidden="true" />
             (437) 784-9500
           </a>
-          <a href="tel:+14377849500" className="grid h-10 w-10 place-items-center rounded-xl border border-border lg:hidden text-primary hover:border-accent hover:text-accent">
-            <Phone className="h-4 w-4" />
+          <a
+            href="tel:+14377849500"
+            aria-label="Call Buildora at (437) 784-9500"
+            className="grid h-10 w-10 place-items-center rounded-xl border border-border lg:hidden text-primary hover:border-accent hover:text-accent"
+          >
+            <Phone className="h-4 w-4" aria-hidden="true" />
           </a>
 
           {/* CTA */}
@@ -154,9 +162,11 @@ export default function Header() {
           {/* Mobile Menu Button */}
           <button
             onClick={toggleMobile}
+            aria-label="Toggle navigation menu"
+            aria-expanded={mobileOpen}
             className="grid h-10 w-10 place-items-center rounded-xl border border-border lg:hidden text-primary hover:border-accent hover:text-accent focus:outline-none"
           >
-            {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            {mobileOpen ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
           </button>
         </div>
       </div>

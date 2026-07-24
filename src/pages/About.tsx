@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Award, Zap, Eye, Target, Heart, Check, Info } from "lucide-react";
 import { motion } from "motion/react";
+import SEO from "../components/SEO";
 
 const revealVariants = {
   hidden: { opacity: 0, y: 32 },
@@ -14,6 +15,10 @@ const revealVariants = {
 export default function About() {
   return (
     <div className="pt-14 text-primary select-text overflow-hidden">
+      <SEO 
+        title="About Buildora | Toronto Web Design & Software Engineering" 
+        description="Learn about Scott Martin and Buildora: high-performance custom web design, software engineering from TMU, transparent pricing, and local SEO for small business." 
+      />
       {/* Breadcrumb */}
       <div className="border-b border-border bg-surface">
         <div className="container-page py-3 text-sm text-muted-foreground">

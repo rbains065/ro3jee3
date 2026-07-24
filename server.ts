@@ -9,6 +9,16 @@ async function startServer() {
   // Body parsing middleware
   app.use(express.json());
 
+  // Security headers middleware
+  app.use((req, res, next) => {
+    res.setHeader("X-Content-Type-Options", "nosniff");
+    res.setHeader("X-Frame-Options", "SAMEORIGIN");
+    res.setHeader("X-XSS-Protection", "1; mode=block");
+    res.setHeader("Referrer-Policy", "strict-origin-when-cross-origin");
+    res.setHeader("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
+    next();
+  });
+
   // API and SEO endpoints
   app.get("/google0fd9aab7e2e42477.html", (req, res) => {
     res.type("text/html").send("google-site-verification: google0fd9aab7e2e42477.html");

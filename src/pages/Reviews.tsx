@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { Star, MessageSquare, ArrowRight, ExternalLink } from "lucide-react";
 import { motion } from "motion/react";
 import ReviewsList from "../components/ReviewsList";
+import SEO from "../components/SEO";
 
 const revealVariants = {
   hidden: { opacity: 0, y: 32 },
@@ -15,6 +16,10 @@ const revealVariants = {
 export default function Reviews() {
   return (
     <div className="pt-14 overflow-hidden">
+      <SEO 
+        title="Client Reviews & Case Studies | Buildora Web Design" 
+        description="Read 29+ verified 5.0-star Google reviews from small business owners, contractors, and clinics who work with Buildora Web Design." 
+      />
       {/* breadcrumb */}
       <div className="border-b border-border bg-surface">
         <div className="container-page py-3 text-sm text-muted-foreground">

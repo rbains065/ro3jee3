@@ -47,9 +47,17 @@ function AppContent() {
   const location = useLocation();
   return (
     <div className="flex min-h-screen flex-col bg-background font-sans text-primary">
+      {/* Skip to main content link for keyboard & screen reader accessibility */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded-lg focus:bg-accent focus:px-4 focus:py-2 focus:text-sm focus:font-bold focus:text-white shadow-lg"
+      >
+        Skip to main content
+      </a>
+
       <Header />
       
-      <div className="flex-1">
+      <main id="main-content" className="flex-1">
         <AnimatePresence mode="wait">
           <div key={location.pathname}>
             <Routes>
@@ -71,7 +79,7 @@ function AppContent() {
             </Routes>
           </div>
         </AnimatePresence>
-      </div>
+      </main>
 
       <Footer />
     </div>

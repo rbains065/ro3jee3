@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Check, Star, Shield, Zap, Globe, MousePointerClick, Server, Palette, HelpCircle } from "lucide-react";
 import { motion } from "motion/react";
+import SEO from "../components/SEO";
 import { WEBSITES_FAQ } from "../data";
 
 const revealVariants = {
@@ -15,6 +16,21 @@ const revealVariants = {
 export default function WebDesignServices() {
   return (
     <div className="pt-14 text-primary select-text overflow-hidden">
+      <SEO 
+        title="Custom Web Design Services for Local Businesses" 
+        description="High-converting custom web design services for contractors, salons, restaurants, and local services starting at CA$399. Ultra-fast, mobile-first, and SEO-engineered." 
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          "name": "Custom Web Design Services",
+          "provider": {
+            "@type": "Organization",
+            "name": "Buildora Web Design"
+          },
+          "serviceType": "Web Design and Development",
+          "areaServed": ["Canada", "United States"]
+        }}
+      />
       {/* Breadcrumb */}
       <div className="border-b border-border bg-surface">
         <div className="container-page py-3 text-sm text-muted-foreground">

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Check, Globe, Megaphone, Info, ArrowRight, Minus, Plus, Mail } from "lucide-react";
 import { motion } from "motion/react";
 import CostCalculator from "../components/CostCalculator";
+import SEO from "../components/SEO";
 import { PLANS, ADD_ONS, WEBSITES_FAQ } from "../data";
 
 const revealVariants = {
@@ -35,6 +36,17 @@ export default function Pricing() {
 
   return (
     <div className="pt-14 overflow-hidden">
+      <SEO 
+        title="Transparent Web Design Pricing & Plans | CA$399+" 
+        description="Transparent website pricing starting from CA$399 setup + $49/mo. No hidden agency lock-ins, custom React code, shipped in 3-10 business days." 
+        schema={{
+          "@context": "https://schema.org",
+          "@type": "PriceSpecification",
+          "name": "Buildora Web Design Pricing",
+          "priceCurrency": "CAD",
+          "minPrice": "399"
+        }}
+      />
       {/* breadcrumb */}
       <div className="border-b border-border bg-surface">
         <div className="container-page py-3 text-sm text-muted-foreground">

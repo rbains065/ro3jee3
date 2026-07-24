@@ -4,6 +4,7 @@ import { Check, Mail, Phone, MapPin, Send } from "lucide-react";
 import { motion } from "motion/react";
 import { createSubmission } from "../supabase";
 import { sendConfirmationEmail } from "../emailjs";
+import SEO from "../components/SEO";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -48,6 +49,10 @@ export default function Contact() {
 
   return (
     <div className="pt-14 text-primary select-text overflow-hidden">
+      <SEO 
+        title="Contact Buildora | Web Design Agency Toronto & Remote" 
+        description="Contact Buildora Web Design. Talk directly to Scott Martin about your web design, redesign, or local SEO goals. Fast responses within 2 hours." 
+      />
       {/* Breadcrumb */}
       <div className="border-b border-border bg-surface">
         <div className="container-page py-3 text-sm text-muted-foreground">

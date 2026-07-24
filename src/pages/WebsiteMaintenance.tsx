@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Check, Star, ShieldCheck, Server, Lock, Database, Activity, RefreshCw, SquarePen, AlertTriangle } from "lucide-react";
 import { motion } from "motion/react";
+import SEO from "../components/SEO";
 
 const MAINTENANCE_FAQ = [
   {
@@ -33,6 +34,10 @@ const revealVariants = {
 export default function WebsiteMaintenance() {
   return (
     <div className="pt-14 text-primary select-text overflow-hidden">
+      <SEO 
+        title="Website Maintenance & Edge Hosting Plans | CA$49/mo" 
+        description="Reliable website care plans starting at CA$49/mo. Includes CDN edge hosting, SSL management, daily backups, 24/7 uptime monitoring, and same-day edits." 
+      />
       {/* Breadcrumb */}
       <div className="border-b border-border bg-surface">
         <div className="container-page py-3 text-sm text-muted-foreground">

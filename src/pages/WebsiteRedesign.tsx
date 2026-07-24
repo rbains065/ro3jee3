@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Check, Star, ShieldAlert, ArrowRight, Smartphone, Zap, Search, MousePointerClick, BarChart3, HelpCircle } from "lucide-react";
 import { motion } from "motion/react";
+import SEO from "../components/SEO";
 
 const REDESIGN_FAQ = [
   {
@@ -33,6 +34,10 @@ const revealVariants = {
 export default function WebsiteRedesign() {
   return (
     <div className="pt-14 text-primary select-text overflow-hidden">
+      <SEO 
+        title="Website Redesign Services for Small Businesses" 
+        description="Upgrade your outdated website with modern React speed, 301 SEO ranking preservation, and high-converting mobile design." 
+      />
       {/* Breadcrumb */}
       <div className="border-b border-border bg-surface">
         <div className="container-page py-3 text-sm text-muted-foreground">
